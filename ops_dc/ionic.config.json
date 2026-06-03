@@ -1,0 +1,7 @@
+{
+  "name": "ops_dc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
