@@ -1,0 +1,28 @@
+name: CI - Ionic WEB - Action on Commit
+
+on:
+    push:
+        branches: [ main, feature ]
+    pull_request:
+        branches: [ main ]
+
+jobs:
+    verificacion-en-commit:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout del codigo
+              uses: actions/checkout@v4
+
+            - name: Configuracion de Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '24'
+                cache: 'npm'
+                cache-dependency-path: '**/package-lock.json'
+
+            - name: Instalacion de Dependencias del proyecto
+              run: npm ci
+
+            - name: Pruebas unitarias
+              run: npm run test -- --watch=false --browsers=ChromeHeadless
