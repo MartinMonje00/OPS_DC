@@ -23,6 +23,7 @@ jobs:
 
             - name: Instalacion de Dependencias del proyecto
               run: npm ci
+              working-directory: '/ops_dc'
 
             - name: Pruebas unitarias
               run: npm run test -- --watch=false --browsers=ChromeHeadless
