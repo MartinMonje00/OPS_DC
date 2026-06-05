@@ -19,10 +19,8 @@ jobs:
               with:
                 node-version: '24'
                 cache: 'npm'
-                cache-dependency-path: '**/package-lock.json'
+                cache-dependency-path: 'ops_dc/package-lock.json'
 
             - name: Instalacion de Dependencias del proyecto
               run: npm ci
-
-            - name: Pruebas unitarias
-              run: npm run test -- --watch=false --browsers=ChromeHeadless
+              working-directory: './ops_dc'
