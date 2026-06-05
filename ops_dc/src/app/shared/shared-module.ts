@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
+import { IonicModule } from "@ionic/angular";
 
 
 
@@ -15,7 +16,8 @@ import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.com
     SidebarMenuComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    IonicModule
+]
 })
 export class SharedModule { }
