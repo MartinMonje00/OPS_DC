@@ -9,7 +9,7 @@ Para requisitos previos, se necesita estas instalaciones al probar en estado de 
  - Node.js version 24.14.0.
  - Angular CLI version 21.2.14.
  - Ionic CLI version 7.2.1.
- - MySQL/MariaDB.
+ - MySQL.
  - Navegador local.
 
 ## Instalación
@@ -57,7 +57,7 @@ Sugeto a cambios...
 ### Requerimientos previos
  - FileZilla (Para poder mover archivos de la aplicacion WEB a la maquina virtual)
  - PuTTY (Establecer conexion SSH con la maquina virtual (Solo necesario en el caso de Windows))
- - Conocimientos de basicos a intermedios del uso de LinuxOS
+ - Conocimientos de basicos a intermedios del uso de Linux (o GNU/Linux si se usa con interfaz grafica)
 
 # Version del proyecto
-v0.3.1
+v0.3.12
