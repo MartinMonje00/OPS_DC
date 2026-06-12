@@ -9,11 +9,14 @@ Para requisitos previos, se necesita estas instalaciones al probar en estado de 
  - Node.js version 24.14.0.
  - Angular CLI version 21.2.14.
  - Ionic CLI version 7.2.1.
- - MySQL.
+ - MariaDB.
+ - API personalizada para el proyecto.
  - Navegador local.
 
 ## Instalación
-pendiente. sugeto a cambios...
+Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en [Requisitos previos](##Requisitos previos)
+---
+1. este es un test
 
 ## Modulos
 pendiente, sugeto a cambios...
@@ -60,4 +63,4 @@ Sugeto a cambios...
  - Conocimientos de basicos a intermedios del uso de Linux (o GNU/Linux si se usa con interfaz grafica)
 
 # Version del proyecto
-v0.3.12
+v0.3.12.4
