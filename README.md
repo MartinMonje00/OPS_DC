@@ -14,7 +14,7 @@ Para requisitos previos, se necesita estas instalaciones al probar en estado de 
  - Navegador local.
 
 ## Instalación
-Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en [Requisitos previos](## Requisitos previos)
+Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en Requisitos previos
 ---
 1. este es un test
 
@@ -62,5 +62,8 @@ Sugeto a cambios...
  - PuTTY (Establecer conexion SSH con la maquina virtual (Solo necesario en el caso de Windows))
  - Conocimientos de basicos a intermedios del uso de Linux (o GNU/Linux si se usa con interfaz grafica)
 
-# Version del proyecto
-v0.3.12.4
+#### Version del proyecto
+v0.3.12.6
+
+#### Version del README.md
+v1.4.15
