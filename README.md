@@ -14,7 +14,7 @@ Para requisitos previos, se necesita estas instalaciones al probar en estado de 
  - Navegador local.
 
 ## Instalación
-Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en [Requisitos previos](##Requisitos previos)
+Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en [Requisitos previos](## Requisitos previos)
 ---
 1. este es un test
 
