@@ -41,3 +41,5 @@ jobs:
                     git merge origin/$CURRENT_BRANCH --no-edit
                     git push origin $TARGET_BRANCH
                 fi
+
+#version v1.1
