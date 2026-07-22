@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { IonButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth';
+import { UtilsService } from 'src/app/services/utils';
 import { CustomAppInputComponent } from 'src/app/shared/components/custom-app-input/custom-app-input.component';
 
 @Component({
@@ -23,13 +23,13 @@ import { CustomAppInputComponent } from 'src/app/shared/components/custom-app-in
   ]
 })
 export class AuthPage {
+  authSvc = inject(AuthService);
+  utilsSvc = inject(UtilsService);
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
-
-  authSvc = inject(AuthService);
-  router = inject(Router);
 
   async submit() {
     if(this.form.invalid) {
@@ -45,7 +45,9 @@ export class AuthPage {
         password: password!
       });
 
-      console.log('inicio de sesion exitoso', res.code, res.token, res.user)
+      console.log('\ninicio de sesion exitoso\n', res.code, '\n', res.token, '\n', res.user)
+
+      //this.utilsSvc.routerLink('/home')
     } catch (error: any) {
       console.log('error c:', error)
     }

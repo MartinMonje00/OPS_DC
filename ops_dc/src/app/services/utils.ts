@@ -1,21 +1,40 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Utils {
+export class UtilsService {
+  private router = inject(Router);
+
+  routerLink(url: string) {
+    return this.router.navigateByUrl(url);
+  }
 
   loadingCtrl = inject(LoadingController);
 
   loading() {
     return this.loadingCtrl.create({spinner: 'crescent'})
   }
-
+  
   saveInLocalStorage(key: string, value: any) {
-    return localStorage.setItem(key, JSON.stringify(value));
+    const data = typeof value === 'string' ? value : JSON.stringify(value);
+    localStorage.setItem(key, data);
   }
 
-  // preferiblemente requerido: hacer funcion de obtener datos del localStorage para funcion de los guards
-  
+  getFromLocalStorage(key: string) {
+    const item = localStorage.getItem(key);
+    if(!item) return null;
+
+    try {
+      return JSON.parse(item);
+    } catch {
+      return item;
+    }
+  }
+
+  removeFromLocalStorage(key: string) {
+    localStorage.removeItem(key);
+  }
 }
