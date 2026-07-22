@@ -1,2 +1,4 @@
 .github/
 ops_dc/node_modules/
+ops_dc/.angular/
+ops_dc/src/environments/
