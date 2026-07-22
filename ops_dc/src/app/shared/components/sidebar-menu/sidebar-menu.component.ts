@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
-  standalone: false
+  standalone: true
 })
 export class SidebarMenuComponent  implements OnInit {
 
