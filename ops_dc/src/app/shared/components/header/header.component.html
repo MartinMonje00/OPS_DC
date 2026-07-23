@@ -1,7 +1,28 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
     <ion-title>
-      <strong>{{title}}</strong>
+      <strong>{{ title }}</strong>
     </ion-title>
+
+    @if (showIndicators) {
+      <div slot="end" class="header-widgets ion-hide-down-md">
+        <div class="widget-item">
+          <span class="label">DÓLAR (CLP)</span>
+          <span class="value">{{ uf() }}</span>
+        </div>
+        <div class="widget-item">
+          <span class="label">CLIMA</span>
+          <span class="value">{{ dollar() }}</span>
+        </div>
+        <div class="widget-item">
+          <span class="label">UF</span>
+          <span class="value">{{ weather() }}</span>
+        </div>
+      </div>
+    }
   </ion-toolbar>
 </ion-header>

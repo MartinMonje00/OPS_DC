@@ -8,19 +8,18 @@ import { CustomAppInputComponent } from './components/custom-app-input/custom-ap
 
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    SidebarMenuComponent,
-    CustomAppInputComponent
-  ],
+  declarations: [],
   exports: [
+    CommonModule,
     HeaderComponent,
     SidebarMenuComponent,
     CustomAppInputComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    HeaderComponent,
+    SidebarMenuComponent,
+    CustomAppInputComponent
 ]
 })
 export class SharedModule { }

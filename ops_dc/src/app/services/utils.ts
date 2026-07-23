@@ -1,21 +1,25 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { Router, TitleStrategy, UrlTree } from '@angular/router';
+import { AlertController, LoadingController, ModalController, ModalOptions, NavController, ToastController, ToastOptions } from '@ionic/angular/standalone';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilsService {
   private router = inject(Router);
+  private navCtrl = inject(NavController);
+
+  loadingCtrl = inject(LoadingController);
+  toastCtrl = inject(ToastController);
+  modalCtrl = inject(ModalController);
+  alertCtrl = inject(AlertController);
 
   routerLink(url: string) {
     return this.router.navigateByUrl(url);
   }
 
-  loadingCtrl = inject(LoadingController);
-
-  loading() {
-    return this.loadingCtrl.create({spinner: 'crescent'})
+  getRouterUrlTree(url: string): UrlTree {
+    return this.router.createUrlTree([url]);
   }
   
   saveInLocalStorage(key: string, value: any) {
@@ -36,5 +40,41 @@ export class UtilsService {
 
   removeFromLocalStorage(key: string) {
     localStorage.removeItem(key);
+  }
+
+  loading() {
+    return this.loadingCtrl.create({spinner: 'crescent'})
+  }
+
+  async presentToast(opts?: ToastOptions) {
+    const toast = await this.toastCtrl.create(opts);
+    await toast.present();
+  }
+
+  async presentModal(opts: ModalOptions) {
+    const modal = await this.modalCtrl.create(opts);
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if(data) return data;
+  }
+
+  dismissModal(data?: any) {
+    return this.modalCtrl.dismiss(data);
+  }
+
+  async presentAlert(opts: { header: string, message: string, confirmText: string, cancelText: string }): Promise<boolean> {
+    return new Promise(async resolve => {
+      const alert = await this.alertCtrl.create({
+        header: opts.header,
+        message: opts.message,
+        buttons: [
+          { text: opts.cancelText, role: 'cancel', handler: () => resolve(false) },
+          { text: opts.confirmText, role: 'confirm', handler: () => resolve(true) }
+        ]
+      });
+      await alert.present();
+    });
   }
 }

@@ -40,10 +40,6 @@ export class AuthService {
         }
     }
 
-    getToken(): string | null {
-        return this.utilsSvc.getFromLocalStorage('Token');
-    }
-
     signOut(): void {
         this.utilsSvc.removeFromLocalStorage('Token');
         this.utilsSvc.removeFromLocalStorage('User');

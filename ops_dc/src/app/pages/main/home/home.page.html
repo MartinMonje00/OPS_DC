@@ -1,9 +1,43 @@
-<!--<app-header title="Inicio"></app-header> concepto para header, faltan definiciones -->
+<app-header title="Bienvenido al Hub de Gestión Operacional"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="cards-grid">
+    <!-- Bloques de codigo - Algunos de estos bloques pueden estar desabilitados por falta de funciones -->
+    <!-- GESTION -->
+
+    <ion-card class="module-card card-purple">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="grid-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Gestión</h3>
+          <p class="card-subtitle">Control y Seguimiento de Porcesos y Proyectos</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Indicadores e gestión</li>
+          <li>• Proyectos y tareas</li>
+          <li>• Cumplimiento de objetivos</li>
+          <li>• Mejora continua</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" routerLink="/main/management" class="action-btn">
+        <span class="btn-text">Ingresar al dashboard</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!-- VENTAS (Temporalmente Deshabilitado) -->
+    <!-- DATACENTER -->
+    <!-- ADMINISTRACION -->
+    <!-- ARQUITECTURA -->
+    <!-- OPERACIONES -->
+    <!-- GERENCIA GENERAL -->
+    <!-- SEGURIDAD -->
+  </div>
 </ion-content>

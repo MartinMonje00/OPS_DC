@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { IonButton, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonButton, IonContent } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { alertCircleOutline, lockClosedOutline, mailOutline, personCircleOutline } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth';
 import { UtilsService } from 'src/app/services/utils';
 import { CustomAppInputComponent } from 'src/app/shared/components/custom-app-input/custom-app-input.component';
@@ -12,14 +14,7 @@ import { CustomAppInputComponent } from 'src/app/shared/components/custom-app-in
   styleUrls: ['./auth.page.scss'],
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    CustomAppInputComponent,
-    ReactiveFormsModule
+    CommonModule, IonContent, IonButton, CustomAppInputComponent, ReactiveFormsModule
   ]
 })
 export class AuthPage {
@@ -31,11 +26,18 @@ export class AuthPage {
     password: new FormControl('', [Validators.required])
   });
 
+  constructor() {
+    addIcons({ mailOutline, lockClosedOutline, personCircleOutline, alertCircleOutline })
+  }
+
   async submit() {
     if(this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
+
+    const loading = await this.utilsSvc.loading();
+    await loading.present();
 
     const { email, password } = this.form.value;
 
@@ -45,11 +47,15 @@ export class AuthPage {
         password: password!
       });
 
-      console.log('\ninicio de sesion exitoso\n', res.code, '\n', res.token, '\n', res.user)
+      console.log(res.code)
 
-      //this.utilsSvc.routerLink('/home')
-    } catch (error: any) {
-      console.log('error c:', error)
+      this.utilsSvc.routerLink('/main/home')
+
+      this.form.reset();
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+    } finally {
+      loading.dismiss();
     }
   }
 }

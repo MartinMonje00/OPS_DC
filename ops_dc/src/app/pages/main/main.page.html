@@ -1,7 +1,30 @@
 <ion-split-pane content-id="main-content">
   <ion-menu content-id="main-content" type="overlay">
+    <ion-header color="primary">
+      <ion-toolbar>
+        <ion-title>S&A Business Hub</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
     <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/main/home" routerDirection="root" lines="none">
+            <ion-icon slot="start" name="home-outline"></ion-icon>
+            <ion-label>Inicio / Panel</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
     </ion-content>
+
+    <ion-footer class="ion-no-border">
+      <ion-toolbar>
+        <ion-item (click)="signOut()" lines="none" detail="false">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-toolbar>
+    </ion-footer>
   </ion-menu>
 
   <div class="ion-page" id="main-content">

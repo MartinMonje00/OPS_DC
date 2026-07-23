@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
+import { 
+  IonButton, IonCard, IonContent, IonIcon
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { arrowForwardOutline, gridOutline } from 'ionicons/icons';
+import { AuthService } from 'src/app/services/auth';
+import { SharedModule } from 'src/app/shared/shared-module';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +14,18 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonHeader,
-    IonContent,
-    IonToolbar,
-    IonTitle
+    CommonModule, IonContent, IonButton, IonCard, IonIcon,
+    SharedModule
   ]
 })
-export class HomePage {}
+export class HomePage {
+  private authSvc= inject(AuthService);
+
+  user = this.authSvc.currentUser;
+
+  userRole = computed(() => this.user()?.role)
+
+  constructor() {
+    addIcons({ gridOutline, arrowForwardOutline })
+  }
+}
