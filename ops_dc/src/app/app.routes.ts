@@ -26,10 +26,6 @@ export const routes: Routes = [
                 path: 'management',
                 loadComponent: () => import('./pages/main/management/management.page').then(m => m.ManagementPage)
             },
-            {
-                path: 'datacenter',
-                loadComponent: () => import('./pages/main/datacenter/datacenter.page').then(m => m.DatacenterPage)
-            }
         ]
     },
     {

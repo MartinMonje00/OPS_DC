@@ -8,7 +8,7 @@ $purple-accent: #6366f1;
 $cyan-accent: #06b6d4;
 $teal-accent: #10b981;
 $orange-accent: #f97316;
-$red-accent: #f93816;
+$red-accent: #ef4444;
 
 .module-card {
     background-color: $bg-card;
@@ -121,6 +121,66 @@ $red-accent: #f93816;
 
             &:hover {
                 --background: rgba(99, 102, 241, 0.08);
+            }
+        }
+    }
+
+    &.card-teal {
+        .icon-container ion-icon {
+            color: $teal-accent;
+        }
+
+        .action-btn {
+            --border-color: #0e4a3b;
+            --color: $teal-accent;
+
+            &:hover {
+                --background: rgba(16, 185, 129, 0.08);
+            }
+        }
+    }
+
+    &.card-cyan {
+        .icon-container ion-icon {
+            color: $cyan-accent;
+        }
+
+        .action-btn {
+            --border-color: #0c3f66;
+            --color: $cyan-accent;
+
+            &:hover {
+                --background: rgba(14, 165, 233, 0.08);
+            }
+        }
+    }
+
+    &.card-orange {
+        .icon-container ion-icon {
+            color: $orange-accent;
+        }
+
+        .action-btn {
+            --border-color: #662c0c;
+            --color: $orange-accent;
+
+            &:hover {
+                --background: rgba(249, 115, 22, 0.08);
+            }
+        }
+    }
+
+    &.card-red {
+        .icon-container ion-icon {
+            color: $red-accent;
+        }
+
+        .action-btn {
+            --border-color: #5e1616;
+            --color: $red-accent;
+
+            &:hover {
+                --background: rgba(239, 68, 68, 0.08);
             }
         }
     }

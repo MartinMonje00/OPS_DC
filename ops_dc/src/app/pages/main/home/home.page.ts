@@ -4,7 +4,10 @@ import {
   IonButton, IonCard, IonContent, IonIcon
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { arrowForwardOutline, gridOutline } from 'ionicons/icons';
+import {
+  arrowForwardOutline, cartOutline, cubeOutline, gridOutline, personOutline,
+  radioOutline, serverOutline, shieldOutline, statsChartOutline
+} from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth';
 import { SharedModule } from 'src/app/shared/shared-module';
 
@@ -26,6 +29,9 @@ export class HomePage {
   userRole = computed(() => this.user()?.role)
 
   constructor() {
-    addIcons({ gridOutline, arrowForwardOutline })
+    addIcons({
+      gridOutline, arrowForwardOutline, cartOutline, serverOutline, personOutline,
+      radioOutline, cubeOutline, statsChartOutline, shieldOutline
+    })
   }
 }

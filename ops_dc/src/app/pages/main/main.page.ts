@@ -1,11 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { 
-  IonContent, IonMenu, IonSplitPane, IonRouterOutlet, IonToolbar,
-  IonHeader, IonTitle, IonList, IonMenuToggle, IonItem,
-  IonIcon, IonLabel, IonFooter 
+  IonContent, IonMenu, IonSplitPane, IonRouterOutlet, IonIcon
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { homeOutline, logOutOutline } from 'ionicons/icons';
+import {
+  briefcaseOutline, caretDownOutline, caretForwardOutline, cartOutline, clipboardOutline,
+  flashOutline, gridOutline, logOutOutline, peopleOutline, serverOutline,
+  shapesOutline, shieldCheckmarkOutline, square, squareOutline, statsChartOutline,
+  sunnyOutline, triangleOutline, cogOutline, downloadOutline, thermometerOutline,
+  alertOutline,
+  timeSharp
+} from 'ionicons/icons';
+import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth';
 import { UtilsService } from 'src/app/services/utils';
 
@@ -15,17 +22,49 @@ import { UtilsService } from 'src/app/services/utils';
   styleUrls: ['./main.page.scss'],
   standalone: true,
   imports: [
-    IonSplitPane, IonMenu, IonContent, IonRouterOutlet, IonToolbar,
-    IonHeader, IonTitle, IonList, IonMenuToggle, IonItem,
-    IonIcon, IonLabel, IonFooter
+    IonSplitPane, IonMenu, IonContent, IonRouterOutlet, IonIcon,
+    RouterLink, RouterLinkActive
   ]
 })
-export class MainPage {
+export class MainPage implements OnInit {
   private authSvc = inject(AuthService);
   private utilsSvc = inject(UtilsService);
+  private router = inject(Router);
+
+  isDatacenterOpen: boolean = false;
 
   constructor() {
-    addIcons({ homeOutline, logOutOutline })
+    addIcons({
+      sunnyOutline, square, statsChartOutline, briefcaseOutline, cogOutline,
+      gridOutline, cartOutline, shapesOutline, serverOutline, caretForwardOutline,
+      caretDownOutline, shieldCheckmarkOutline, squareOutline, triangleOutline, downloadOutline,
+      flashOutline, peopleOutline, logOutOutline, clipboardOutline, thermometerOutline,
+      alertOutline
+    })
+  }
+
+  ngOnInit() {
+    this.checkActiveRoute(this.router.url);
+
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.checkActiveRoute(event.urlAfterRedirects);
+    });
+  }
+
+  private checkActiveRoute(url: string) {
+    if (url.includes('/datacenter')) {
+      this.isDatacenterOpen = true;
+    }
+  }
+
+  toggleDatacenter(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.isDatacenterOpen = !this.isDatacenterOpen;
   }
 
   async signOut() {

@@ -1,34 +1,55 @@
 <ion-content class="auth-content">
-  <div class="auth-container">
-    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()">
-      <div class="form-inputs">
-        <div class="input-group">
-          <app-custom-app-input icon="mail-outline" autocomplete="email" [control]="form.controls.email" type="email" label="Correo Electronico"></app-custom-app-input>
-          @if (form.controls.email.errors && form.controls.email.touched) {
-            @if (form.controls.email.errors['required']) {
-              <div>El correo es requerido</div>
-            }
-            @if (form.controls.email.errors['email']) {
-              <div>El correo no es valido</div>
-            }
-          }
+  <div class="auth-wrapper">
+
+    <div class="auth-card">
+
+      <div class="auth-header">
+        <div class="building-icon-wrapper">
+          <ion-icon name="business-outline" class="building-icon"></ion-icon>
         </div>
-        <div class="input-group">
-          <app-custom-app-input icon="lock-closed-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-custom-app-input>
-          @if (form.controls.password.errors && form.controls.password.touched) {
-          <div class="validators">
-            @if (form.controls.password.errors['required']) {
-            <div>La contraseña es requerida</div>
-            }
-          </div>
-          }
+        <h1 class="auth-title">S&A Business Hub</h1>
+        <span class="auth-subtitle">SISTEMA DE CONTROL</span>
+      </div>
+
+      <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label class="field-label">Usuario</label>
+          <input
+            id="username"
+            type="text"
+            class="custom-input"
+            placeholder="Ingresa tu usuario"
+            formControlName="username"
+            autocomplete="username"
+          />
         </div>
+
+        <div class="form-group">
+          <label class="field-label">Contraseña</label>
+          <input 
+            id="password"
+            type="password" 
+            class="custom-input" 
+            placeholder="Ingresa tu contraseña"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <div class="form-actions">
+          <ion-button expand="block" mode="md" type="submit" class="gradient-submit-btn" [disabled]="form.invalid">
+            INICIAR SESIÓN
+          </ion-button>
+        </div>
+
+      </form>
+
+      <div class="auth-footer">
+        <span class="version-info">v2.0.1 · ops-dc</span>
+        <span class="copyright-info">© 2026 S&A Chile. Todos los derechos reservados.</span>
       </div>
-      <div class="form-actions">
-        <ion-button  expand="block" mode="ios" class="submit-btn" type="submit" [disabled]="form.invalid">
-          Iniciar Sesión
-        </ion-button>
-      </div>
-    </form>
+
+    </div>
+
   </div>
 </ion-content>

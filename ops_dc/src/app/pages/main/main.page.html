@@ -1,30 +1,124 @@
 <ion-split-pane content-id="main-content">
-  <ion-menu content-id="main-content" type="overlay">
-    <ion-header color="primary">
-      <ion-toolbar>
-        <ion-title>S&A Business Hub</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-menu contentId="main-content" type="overlay" class="custom-sidebar">
+    <ion-content class="sidebar-content">
+      <div class="sidebar-header">
+        <div class="logo-box"></div>
+        <span class="logo-title">S&A Business Hub</span>
+      </div>
 
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/main/home" routerDirection="root" lines="none">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
-            <ion-label>Inicio / Panel</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
+      <div class="user-card">
+        <div class="user-avatar">MM</div>
+        <div class="user-info">
+          <span class="user-name">Martin Monje</span>
+          <span class="user-role">Administrador</span>
+        </div>
+      </div>
+
+      <div class="theme-toggle-btn">
+        <ion-icon name="sunny-outline"></ion-icon>
+        <span>Modo claro</span>
+      </div>
+
+      <nav class="sidebar-nav">
+
+        <div class="nav-category">PRINCIPAL</div>
+
+        <a class="nav-item active" routerLink="/main/home" routerDirection="root">
+          <ion-icon name="square" class="icon-cyan-small"></ion-icon>
+          <span class="nav-text">Inicio / Panel</span>
+        </a>
+
+        <div class="nav-category">PERFILES</div>
+
+        <!--<a class="nav-item" routerLink="">
+          <ion-icon name="stats-chart-outline" class="icon-indigo"></ion-icon>
+          <span class="nav-text">Gerencia</span>
+        </a>
+        
+        <a class="nav-item" routerLink="">
+          <ion-icon name="briefcase-outline" class="icon-pink"></ion-icon>
+          <span class="nav-text">Administración</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="cog-outline" class="icon-purple"></ion-icon>
+          <span class="nav-text">Operaciones</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="grid-outline" class="icon-cyan"></ion-icon>
+          <span class="nav-text">Gestión</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="cart-outline" class="icon-gold"></ion-icon>
+          <span class="nav-text">Ventas</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="shapes-outline" class="icon-orange"></ion-icon>
+          <span class="nav-text">Arquitectura</span>
+        </a> -->
+
+        
+
+        <!--<a class="nav-item" routerLink="">
+          <ion-icon name="shield-checkmark-outline" class="icon-amber"></ion-icon>
+          <span class="nav-text">Seguridad</span>
+        </a> -->
+
+        <div class="nav-category">GESTIÓN</div>
+
+        <a class="nav-item" routerLink="">
+          <span class="badge-text-cyan">CL</span>
+          <span class="nav-text">ChileCompra</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">Contactos</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="triangle-outline" class="icon-cyan"></ion-icon>
+          <span class="nav-text">Licitaciones</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="square-outline" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">Cotizador</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">CMDB</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="download-outline" class="icon-cyan"></ion-icon>
+          <span class="nav-text">Respaldos</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="flash-outline" class="icon-orange"></ion-icon>
+          <span class="nav-text">Recursos y Salas</span>
+        </a>
+
+        <div class="nav-category">ADMINISTRACIÓN</div>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="people-outline" class="icon-purple"></ion-icon>
+          <span class="nav-text">Usuarios</span>
+        </a>
+
+        <div class="logout-wrapper">
+          <a class="nav-item logout-item" (click)="signOut()" role="button">
+            <ion-icon name="log-out-outline" class="icon-red"></ion-icon>
+            <span class="nav-text text-red">Cerrar Sesión</span>
+          </a>
+        </div>
+      </nav>
     </ion-content>
-
-    <ion-footer class="ion-no-border">
-      <ion-toolbar>
-        <ion-item (click)="signOut()" lines="none" detail="false">
-          <ion-icon slot="start" name="log-out-outline"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
-        </ion-item>
-      </ion-toolbar>
-    </ion-footer>
   </ion-menu>
 
   <div class="ion-page" id="main-content">

@@ -1,0 +1,284 @@
+$bg-sidebar: #050c18;
+$border-sidebar: #0e2238;
+$text-category: #00e5ff;
+$text-main: #e2e8f0;
+$text-muted: #94a3b8;
+
+ion-split-pane {
+    --side-min-width: 235px;
+    --side-max-width: 235px;
+    --side-width: 235px;
+}
+
+.custom-sidebar {
+    --background: $bg-sidebar;
+    --width: 270px;
+    border-right: 1px solid #00b4d8;
+
+    ion-content.sidebar-content {
+        --background: $bg-sidebar;
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --padding-top: 20px;
+        --padding-bottom: 20px;
+    }
+
+    ion-content::part(scroll) {
+        &::-webkil-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #00e5ff;
+            border-radius: 4px;
+        }
+    }
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .logo-box {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #091a30;
+        border: 1px solid #1e3a5f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ion-icon {
+            font-size: 22px;
+            color: #0284c7;
+        }
+    }
+
+    .logo-title {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: -0.2px;
+    }
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid #ef4444;
+    border-radius: 4px;
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: #991b1b;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+
+        .user-name {
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .user-role {
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    }
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: #0a1829;
+    border: 1px solid #182e4a;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    ion-icon {
+        font-size: 16px;
+        color: #38bdf8;
+    }
+}
+
+.sidebar-nav {
+    margin-top: 16px;
+
+    .nav-category {
+        color: $text-category;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        margin: 18px 0 8px 4px;
+        text-transform: uppercase;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: $text-main;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: var(--background) 0.2s ease;
+        cursor: pointer;
+
+        ion-icon, .badge-text-cyan {
+            width: 22px;
+            min-width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        ion-icon {
+            font-size: 12px;
+            height: 12px;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        &.active {
+            background: #08283b;
+            border: 1px solid #00b4d8;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        &.item-boxed {
+            background: #0a1b2d;
+            border: 1px solid #1b385a;
+            border-radius: 8px;
+            margin: 4px 0;
+
+            .arrow-icon {
+                margin-left: auto;
+                font-size: 12px;
+                color: #38bdf8;
+                width: auto;
+                min-width: auto;
+            }
+        }
+
+        .nav-text {
+            flex: 1;
+        }
+    }
+
+    .sidebar-accordion {
+        background: transparent;
+
+        ion-accordion {
+            background: transparent;
+            margin: 4px 0;
+
+            ion-item.nav-accordion-header {
+                --background: #0a1b2d;
+                --border-color: #1b385a;
+                --border-style: solid;
+                --border-width: 1px;
+                --border-radius: 8px;
+                --padding-start: 10px;
+                --inner-padding-end: 8px;
+                --min-height: 38px;
+                cursor: pointer;
+
+                ion-label {
+                    color: $text-main;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    white-space: nowrap;
+                }
+
+                &::part(indicator) {
+                    color: #38bdf8;
+                    transform: scale(0.7);
+                    margin-left: 0;
+                }
+            }
+
+            &.accordion-expanded ion-item.nav-accordion-header {
+                --border-color: #00b4d8;
+            }
+        }
+
+        .nav-accordion-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-top: 4px;
+
+            .sub-item {
+                padding-left: 24px;
+                font-size: 0.82rem;
+            }
+        }
+    }
+}
+
+.icon-cyan-small { font-size: 8px; color: #00e5ff; }
+.icon-cyan       { font-size: 18px; color: #38bdf8; }
+.icon-indigo     { font-size: 18px; color: #818cf8; }
+.icon-pink       { font-size: 18px; color: #f472b6; }
+.icon-purple     { font-size: 18px; color: #c084fc; }
+.icon-gold       { font-size: 18px; color: #fbbf24; }
+.icon-orange     { font-size: 18px; color: #f97316; }
+.icon-amber      { font-size: 18px; color: #f59e0b; }
+.icon-red        { font-size: 18px; color: #ef4444; }
+
+.icon-diamond {
+    transform: rotate(45deg);
+    font-size: 11px;
+}
+
+.badge-text-cyan {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #00e5ff;
+    width: 18px;
+    text-align: center;
+}
+
+.logout-wrapper {
+    margin-top: 24px;
+    padding-top: 12px;
+
+    .text-red {
+        color: #ef4444;
+        font-weight: 600;
+    }
+}
