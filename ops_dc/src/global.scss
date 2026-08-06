@@ -55,3 +55,73 @@ ion-modal.custom-currency-modal {
         overflow: hidden;
     }
 }
+
+:root {
+    --bg-main: linear-gradient(180deg, #112c3b 0%, #0d212d 20%, #061017 100%);
+    --bg-card: rgba(15, 23, 42, 0.6);
+    --bg-sidebar: #09131b;
+    --border-color: rgba(56, 189, 248, 0.15);
+
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+
+    --accent-purple: #8b5cf6;
+    --accent-cyan: #06b6d4;
+    --accent-orange: #f97316;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+
+    --border-accent-purple: #3b2860;
+    --border-accent-cyan: #185870;
+    --border-accent-orange: #6b3b24;
+    --border-accent-green: #165043;
+    --border-accent-red: #5c1d2a;
+}
+
+body.light-theme {
+    --bg-main: linear-gradient(180deg, #bbe1f2 0%, #dbebf5 40%, #f4f8fb 100%);
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --border-color: rgba(203, 213, 225, 0.8);
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+
+    --input-bg: #edf2f7;
+    --card-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
+
+    --accent-purple: #7c3aed;
+    --accent-cyan: #0891b2;
+    --accent-orange: #ea580c;
+    --accent-green: #059669;
+    --accent-red: #dc2626;
+
+    --border-accent-purple: #c8aeed;
+    --border-accent-cyan: #89cbea;
+    --border-accent-orange: #fac3a2;
+    --border-accent-green: #9de3c7;
+    --border-accent-red: #f3a7b0;
+}
+
+.authenticated-layout {
+    background: var(--bg-main);
+    color: var(--text-primary);
+
+    ion-content {
+        --background: transparent;
+        --color: var(--text-primary);
+    }
+}
+
+/*
+$purple-accent: #6366f1;
+$cyan-accent: #06b6d4;
+$teal-accent: #10b981;
+$orange-accent: #f97316;
+$red-accent: #ef4444;
+*/

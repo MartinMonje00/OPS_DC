@@ -1,7 +1,7 @@
 export interface User {
     uid: string;
     name: string;
-    role: 'Admin' | 'Trabajador';
+    role: 'admin' | 'trabajador';
 }
 
 export interface LoginCredentials {

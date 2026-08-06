@@ -6,7 +6,7 @@
     <!- Bloques de codigo - Algunos de estos bloques pueden estar desabilitados por falta de funciones ->
     <!- GESTION ->
 
-    <ion-card class="module-card card-purple">
+    <ion-card class="module-card card-purple border-purple">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="grid-outline"></ion-icon>
@@ -27,15 +27,15 @@
         </ul>
       </div>
 
-      <ion-button expand="block" fill="clear" routerLink="/main/management" class="action-btn">
-        <span class="btn-text">Ingresar al dashboard</span>
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-card>
 
     <!- VENTAS (Temporalmente Deshabilitado) ->
 
-    <ion-card class="module-card card-teal">
+    <ion-card class="module-card card-teal border-green">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="cart-outline"></ion-icon>
@@ -61,11 +61,11 @@
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-card>
-  -->
+    -->
   
     <!-- DATACENTER -->
 
-    <ion-card class="module-card card-cyan">
+    <ion-card class="module-card card-cyan border-cyan">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="server-outline"></ion-icon>
@@ -86,16 +86,16 @@
         </ul>
       </div>
 
-      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
-        <span class="btn-text">Dashboard proximamente</span>
+      <ion-button expand="block" fill="clear" class="action-btn">
+        <span class="btn-text">Ingresar al dashboard</span>
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-card>
+    
     <!--
-
     <!- ADMINISTRACION ->
 
-    <ion-card class="module-card card-cyan">
+    <ion-card class="module-card card-cyan border-cyan">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="person-outline"></ion-icon>
@@ -124,7 +124,7 @@
 
     <!- ARQUITECTURA ->
 
-    <ion-card class="module-card card-orange">
+    <ion-card class="module-card card-orange border-orange">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="cube-outline"></ion-icon>
@@ -153,7 +153,7 @@
 
     <!- OPERACIONES ->
 
-    <ion-card class="module-card card-cyan">
+    <ion-card class="module-card card-cyan border-cyan">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="radio-outline"></ion-icon>
@@ -182,7 +182,7 @@
 
     <!- GERENCIA GENERAL ->
 
-    <ion-card class="module-card card-purple">
+    <ion-card class="module-card card-purple border-purple">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="stats-chart-outline"></ion-icon>
@@ -211,7 +211,7 @@
 
     <!- SEGURIDAD ->
 
-    <ion-card class="module-card card-red">
+    <ion-card class="module-card card-red border-red">
       <div class="card-header-layout">
         <div class="icon-container">
           <ion-icon name="shield-outline"></ion-icon>
@@ -237,7 +237,7 @@
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-card>
-  -->
+    -->
 
   </div>
 </ion-content>

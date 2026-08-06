@@ -24,7 +24,7 @@ export class CurrencyModalComponent  implements OnInit {
   utilsSvc = inject(UtilsService);
   indicatorsSvc = inject(IndicatorsService);
 
-  @Input() indicatorType: 'uf' | 'dollar' = 'uf';
+  @Input() indicatorType: 'uf' | 'dolar' = 'uf';
 
   historyList: HistoryRecord[] = [];
   isLoading: boolean = true

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ManagementPage } from './management.page';
+import { TempPage } from './temp.page';
 
-describe('ManagementPage', () => {
-  let component: ManagementPage;
-  let fixture: ComponentFixture<ManagementPage>;
+describe('TempPage', () => {
+  let component: TempPage;
+  let fixture: ComponentFixture<TempPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagementPage);
+    fixture = TestBed.createComponent(TempPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

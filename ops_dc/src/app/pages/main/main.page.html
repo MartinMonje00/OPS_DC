@@ -1,4 +1,4 @@
-<ion-split-pane content-id="main-content">
+<ion-split-pane content-id="main-content" class="authenticated-layout">
   <ion-menu contentId="main-content" type="overlay" class="custom-sidebar">
     <ion-content class="sidebar-content">
       <div class="sidebar-header">
@@ -14,9 +14,9 @@
         </div>
       </div>
 
-      <div class="theme-toggle-btn">
-        <ion-icon name="sunny-outline"></ion-icon>
-        <span>Modo claro</span>
+      <div class="theme-toggle-btn" (click)="themeSvc.toggleTheme()" role="button">
+        <ion-icon [name]="themeSvc.isDarkMode() ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+        <span>{{ themeSvc.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}</span>
       </div>
 
       <nav class="sidebar-nav">
@@ -69,16 +69,19 @@
 
         <div class="nav-category">GESTIÓN</div>
 
+        <!--
         <a class="nav-item" routerLink="">
           <span class="badge-text-cyan">CL</span>
           <span class="nav-text">ChileCompra</span>
         </a>
+        -->
 
         <a class="nav-item" routerLink="">
           <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
           <span class="nav-text">Contactos</span>
         </a>
 
+        <!--
         <a class="nav-item" routerLink="">
           <ion-icon name="triangle-outline" class="icon-cyan"></ion-icon>
           <span class="nav-text">Licitaciones</span>
@@ -93,6 +96,7 @@
           <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
           <span class="nav-text">CMDB</span>
         </a>
+        -->
 
         <a class="nav-item" routerLink="">
           <ion-icon name="download-outline" class="icon-cyan"></ion-icon>
@@ -104,12 +108,14 @@
           <span class="nav-text">Recursos y Salas</span>
         </a>
 
-        <div class="nav-category">ADMINISTRACIÓN</div>
+        @if (isAdmin()) {
+          <div class="nav-category">ADMINISTRACIÓN</div>
 
-        <a class="nav-item" routerLink="">
-          <ion-icon name="people-outline" class="icon-purple"></ion-icon>
-          <span class="nav-text">Usuarios</span>
-        </a>
+          <a class="nav-item" routerLink="">
+            <ion-icon name="people-outline" class="icon-purple"></ion-icon>
+            <span class="nav-text">Usuarios</span>
+          </a>
+        }
 
         <div class="logout-wrapper">
           <a class="nav-item logout-item" (click)="signOut()" role="button">

@@ -21,11 +21,7 @@ export const routes: Routes = [
             {
                 path: 'home',
                 loadComponent: () => import('./pages/main/home/home.page').then(m => m.HomePage)
-            },
-            {
-                path: 'management',
-                loadComponent: () => import('./pages/main/management/management.page').then(m => m.ManagementPage)
-            },
+            }
         ]
     },
     {

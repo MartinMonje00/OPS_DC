@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { 
   IonContent, IonMenu, IonSplitPane, IonRouterOutlet, IonIcon
@@ -14,6 +14,7 @@ import {
 } from 'ionicons/icons';
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth';
+import { ThemeService } from 'src/app/services/theme';
 import { UtilsService } from 'src/app/services/utils';
 
 @Component({
@@ -30,6 +31,8 @@ export class MainPage implements OnInit {
   private authSvc = inject(AuthService);
   private utilsSvc = inject(UtilsService);
   private router = inject(Router);
+
+  public themeSvc = inject(ThemeService);
 
   isDatacenterOpen: boolean = false;
 
@@ -52,6 +55,11 @@ export class MainPage implements OnInit {
       this.checkActiveRoute(event.urlAfterRedirects);
     });
   }
+
+  isAdmin = computed(() => {
+    const user = this.authSvc.currentUser();
+    return user?.role === 'admin';
+  })
 
   private checkActiveRoute(url: string) {
     if (url.includes('/datacenter')) {

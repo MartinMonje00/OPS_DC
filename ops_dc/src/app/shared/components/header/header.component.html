@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border custom-header">
-  <ion-toolbar>
+  <ion-toolbar class="transparent-toolbar">
 
     <ion-buttons slot="start">
       <ion-menu-button class="menu-btn"></ion-menu-button>
@@ -21,8 +21,8 @@
             <span class="widget-time">31/7, 12:00 a. m.</span>
           </div>
         </ion-button>
-        <ion-button (click)="openCurrencyModal('dolar')" fill="clear" class="widget-item data-widget custom-ion-button" title="Ver historial Dólar">
-          <div class="widget-item data-widget">
+        <ion-button (click)="openCurrencyModal('dolar')" fill="clear" class="widget-item data-widget custom-ion-btn" title="Ver historial Dólar">
+          <div class="btn-content">
             <span class="label">DÓLAR (CLP)</span>
             <span class="value">{{ dollar() }}</span>
             <span class="widget-time">31/7, 12:00 a. m.</span>

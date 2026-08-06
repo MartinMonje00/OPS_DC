@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, OnDestroy, signal } from '@angular/core';
-import { map, Observable, switchMap, timer } from 'rxjs';
+import { map, Observable, Subscription, switchMap, timer } from 'rxjs';
 
 export interface WeatherData {
   city: string;
@@ -54,7 +54,7 @@ const WMO_WEATHER_MAP: Record<number, WeatherConfig> = {
 })
 export class IndicatorsService implements OnDestroy {
   private http = inject(HttpClient);
-  private weatherTimer?: any;
+  private subscriptions = new Subscription();
 
   uf = signal<string>('Cargando...');
   dollar = signal<string>('Cargando...');
@@ -82,13 +82,16 @@ export class IndicatorsService implements OnDestroy {
     this.getWeather();
 
     const msToNextQuarter = this.getMsToNextQuarterHour();
-    timer(msToNextQuarter, FIFTEEN_MINUTES).subscribe(() => {
+    const weatherSub = timer(msToNextQuarter, FIFTEEN_MINUTES).subscribe(() => {
       this.getWeather();
     });
 
-    timer(0, TWENTY_FOUR_HOURS).subscribe(() => {
+    const econSub = timer(0, TWENTY_FOUR_HOURS).subscribe(() => {
       this.getEconomicIndicators();
     });
+
+    this.subscriptions.add(weatherSub);
+    this.subscriptions.add(econSub);
   }
 
   constructor() {}
@@ -103,7 +106,7 @@ export class IndicatorsService implements OnDestroy {
     });
   }
 
-  getIndicatorHistory(type: 'uf' | 'dollar'): Observable<HistoryRecord[]> {
+  getIndicatorHistory(type: 'uf' | 'dolar'): Observable<HistoryRecord[]> {
     const url = `https://mindicador.cl/api/${type}`;
 
     return this.http.get<any>(url).pipe(
@@ -208,8 +211,6 @@ export class IndicatorsService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.weatherTimer) {
-      clearInterval(this.weatherTimer);
-    }
+    this.subscriptions.unsubscribe();
   }
 }

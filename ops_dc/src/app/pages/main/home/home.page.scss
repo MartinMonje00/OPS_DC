@@ -1,14 +1,14 @@
-$bg-card: #0b1325;
-$border-card: #1c2a48;
-$text-title: #ffffff;
-$text-subtitle: #8e9bb0;
+$bg-card: var(--bg-card);
+$border-card: var(--border-color);
+$text-title: var(--text-primary);
+$text-subtitle: var(--text-secondary);
 $text-list: #a0aec0;
 
-$purple-accent: #6366f1;
-$cyan-accent: #06b6d4;
-$teal-accent: #10b981;
-$orange-accent: #f97316;
-$red-accent: #ef4444;
+$purple-accent: var(--accent-purple);
+$cyan-accent: var(--accent-cyan);
+$teal-accent: var(--accent-green);
+$orange-accent: var(--accent-orange);
+$red-accent: var(--accent-red);
 
 .module-card {
     background-color: $bg-card;
@@ -116,8 +116,8 @@ $red-accent: #ef4444;
         }
 
         .action-btn {
-            --border-color: #3b336a;
-            --color: $purple-accent;
+            --border-color: var(--accent-purple);
+            --color: var(--accent-purple);
 
             &:hover {
                 --background: rgba(99, 102, 241, 0.08);
@@ -131,8 +131,8 @@ $red-accent: #ef4444;
         }
 
         .action-btn {
-            --border-color: #0e4a3b;
-            --color: $teal-accent;
+            --border-color: var(--accent-green);
+            --color: var(--accent-green);
 
             &:hover {
                 --background: rgba(16, 185, 129, 0.08);
@@ -146,8 +146,8 @@ $red-accent: #ef4444;
         }
 
         .action-btn {
-            --border-color: #0c3f66;
-            --color: $cyan-accent;
+            --border-color: var(--accent-cyan);
+            --color: var(--accent-cyan);
 
             &:hover {
                 --background: rgba(14, 165, 233, 0.08);
@@ -161,8 +161,8 @@ $red-accent: #ef4444;
         }
 
         .action-btn {
-            --border-color: #662c0c;
-            --color: $orange-accent;
+            --border-color: var(--accent-orange);
+            --color: var(--accent-orange);
 
             &:hover {
                 --background: rgba(249, 115, 22, 0.08);
@@ -176,8 +176,8 @@ $red-accent: #ef4444;
         }
 
         .action-btn {
-            --border-color: #5e1616;
-            --color: $red-accent;
+            --border-color: var(--accent-red);
+            --color: var(--accent-red);
 
             &:hover {
                 --background: rgba(239, 68, 68, 0.08);
@@ -185,3 +185,9 @@ $red-accent: #ef4444;
         }
     }
 }
+
+.border-purple { border-color: var(--border-accent-purple) }
+.border-cyan   { border-color: var(--border-accent-cyan) }
+.border-green  { border-color: var(--border-accent-green) }
+.border-orange { border-color: var(--border-accent-orange) }
+.border-red    { border-color: var(--border-accent-red) }
