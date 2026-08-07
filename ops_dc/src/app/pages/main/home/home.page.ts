@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { 
   IonButton, IonCard, IonContent, IonIcon
 } from '@ionic/angular/standalone';
@@ -18,7 +19,7 @@ import { SharedModule } from 'src/app/shared/shared-module';
   standalone: true,
   imports: [
     CommonModule, IonContent, IonButton, IonCard, IonIcon,
-    SharedModule
+    SharedModule, RouterLink
   ]
 })
 export class HomePage {

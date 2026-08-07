@@ -1,16 +1,17 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { 
   IonContent, IonMenu, IonSplitPane, IonRouterOutlet, IonIcon
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
-  briefcaseOutline, caretDownOutline, caretForwardOutline, cartOutline, clipboardOutline,
+  briefcaseOutline, cartOutline, clipboardOutline,
   flashOutline, gridOutline, logOutOutline, peopleOutline, serverOutline,
   shapesOutline, shieldCheckmarkOutline, square, squareOutline, statsChartOutline,
   sunnyOutline, triangleOutline, cogOutline, downloadOutline, thermometerOutline,
   alertOutline,
-  timeSharp
+  chevronDownOutline,
+  chevronForwardOutline
 } from 'ionicons/icons';
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth';
@@ -34,46 +35,42 @@ export class MainPage implements OnInit {
 
   public themeSvc = inject(ThemeService);
 
-  isDatacenterOpen: boolean = false;
+  isDatacenterExpanded = signal<boolean>(false);
 
   constructor() {
     addIcons({
       sunnyOutline, square, statsChartOutline, briefcaseOutline, cogOutline,
-      gridOutline, cartOutline, shapesOutline, serverOutline, caretForwardOutline,
-      caretDownOutline, shieldCheckmarkOutline, squareOutline, triangleOutline, downloadOutline,
+      gridOutline, cartOutline, shapesOutline, serverOutline, shieldCheckmarkOutline,
+      squareOutline, triangleOutline, downloadOutline, chevronDownOutline, chevronForwardOutline,
       flashOutline, peopleOutline, logOutOutline, clipboardOutline, thermometerOutline,
       alertOutline
     })
   }
 
   ngOnInit() {
-    this.checkActiveRoute(this.router.url);
+    this.checkDatacenterRoute(this.router.url);
 
     this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.checkActiveRoute(event.urlAfterRedirects);
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.checkDatacenterRoute(event.urlAfterRedirects || event.url);
     });
+  }
+
+  toggleDatacenterMenu() {
+    this.isDatacenterExpanded.update(value => !value);
+  }
+
+  private checkDatacenterRoute(url: string) {
+    if (url.includes('/main/datacenter')) {
+      this.isDatacenterExpanded.set(true);
+    }
   }
 
   isAdmin = computed(() => {
     const user = this.authSvc.currentUser();
     return user?.role === 'admin';
-  })
-
-  private checkActiveRoute(url: string) {
-    if (url.includes('/datacenter')) {
-      this.isDatacenterOpen = true;
-    }
-  }
-
-  toggleDatacenter(event?: Event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.isDatacenterOpen = !this.isDatacenterOpen;
-  }
+  });
 
   async signOut() {
     const loading = await this.utilsSvc.loading();

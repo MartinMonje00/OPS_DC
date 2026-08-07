@@ -1,13 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>datacenter</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Datacenter" [showIndicators]="true"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">datacenter</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="datacenter-wrapper">
+    <div class="stats-grid">
+      <div class="stat-card border-green">
+        <span class="stat-label">Disponibilidad Mensual</span>
+        <span class="stat-value">100% (datos estaticos de prueba)</span>
+        <span class="stat-subtext">0 min caidos (datos estaticos de prueba)</span>
+      </div>
+      <div class="stat-card border-red">
+        <span class="stat-label">Incidentes</span>
+        <span class="stat-value">1 (datos estaticos de prueba)</span>
+        <span class="stat-subtext">0 del mes (datos estaticos de prueba)</span>
+      </div>
+      <div class="stat-card border-amber">
+        <span class="stat-label">Tareas Pendientes</span>
+        <span class="stat-value">2 (datos estaticos de prueba)</span>
+        <span class="stat-subtext">0 proximos (datos estaticos de prueba)</span>
+      </div>
+      <div class="stat-card border-cyan">
+        <span class="stat-label">Ultima Temperatura</span>
+        <span class="stat-value">21,8°C (datos estaticos de prueba)</span>
+        <span class="stat-subtext">Sala Principal (datos estaticos de prueba)</span>
+      </div>
+    </div>
+
+    <div class="tabs-bar">
+      <a routerLink="resume" routerLinkActive="active" class="tab-pill">Resumen</a>
+      <a routerLink="tasks" routerLinkActive="active" class="tab-pill">Operación diaria</a>
+      <a routerLink="incidents" routerLinkActive="active" class="tab-pill">Incidentes</a>
+      <a routerLink="temp" routerLinkActive="active" class="tab-pill">Temperaturas</a>
+      <a routerLink="logs" routerLinkActive="active" class="tab-pill">Bitacora</a>
+    </div>
+
+    <div class="subpage-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </ion-content>

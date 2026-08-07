@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit, OnDestroy, signal, computed } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { IonButton, IonButtons, IonHeader, IonIcon, IonMenuButton, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
     addIcons({
       notifications, sunnyOutline, moonOutline, partlySunnyOutline, cloudyNightOutline,
       cloudyOutline, cloudOutline, rainyOutline, snowOutline, thunderstormOutline
-    })
+    });
   }
 
   async openCurrencyModal(type: 'uf' | 'dolar') {
@@ -52,6 +52,6 @@ export class HeaderComponent implements OnInit {
       component: CurrencyModalComponent,
       componentProps: { indicatorType: type },
       cssClass: 'custom-currency-modal'
-    })
+    });
   }
 }

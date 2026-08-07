@@ -60,7 +60,39 @@
           <span class="nav-text">Arquitectura</span>
         </a> -->
 
-        
+        <div class="sidebar-dropdown-group" [class.is-expanded]="isDatacenterExpanded()">
+          <button type="button" class="dropdown-trigger-btn" (click)="toggleDatacenterMenu()">
+            <div class="trigger-left">
+              <ion-icon name="server-outline" class="menu-icon"></ion-icon>
+              <span class="menu-label">Datacenter</span>
+            </div>
+            <ion-icon name="chevron-down-outline" class="chevron-icon"></ion-icon>
+          </button>
+          <div class="dropdown-content-wrapper">
+            <div class="dropdown-content-inner">
+              <a routerLink="/main/datacenter/resume" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Resumen</span>
+            </a>
+              <a routerLink="/main/datacenter/tasks" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Tareas</span>
+            </a>
+              <a routerLink="/main/datacenter/incidents" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span
+              ><span>Incidentes</span>
+            </a>
+              <a routerLink="/main/datacenter/temp" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Temperatura</span>
+            </a>
+              <a routerLink="/main/datacenter/logs" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Bitacora</span>
+            </a>
+            </div>
+          </div>
+        </div>
 
         <!--<a class="nav-item" routerLink="">
           <ion-icon name="shield-checkmark-outline" class="icon-amber"></ion-icon>
@@ -128,6 +160,6 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-    <ion-router-outlet></ion-router-outlet>
+    <ion-router-outlet [animated]="false"></ion-router-outlet>
   </div>
 </ion-split-pane>
