@@ -36,6 +36,23 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-menu.custom-sidebar::part(backdrop) {
+    background-color: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 1;
+}
+
+body.light-theme ion-menu.custom-sidebar::part(backdrop) {
+    background-color: rgba(15, 23, 42, 0.2);
+}
+
+#main-content {
+    background: var(--bg-main);
+    opacity: 1;
+    visibility: visible;
+}
+
 ion-modal.custom-currency-modal {
     --width: 480px;
     --height: auto;
@@ -80,6 +97,14 @@ ion-modal.custom-currency-modal {
     --border-accent-orange: #6b3b24;
     --border-accent-green: #165043;
     --border-accent-red: #5c1d2a;
+
+    --dc-card-bg: rgba(13, 27, 42, 0.75);
+    --dc-card-border: rgba(255, 255, 255, 0.08);
+    --dc-row-bg: rgba(16, 32, 51, 0.6);
+    --dc-row-border: rgba(255, 255, 255, 0.06);
+    --dc-track-bg: rgba(255, 255, 255, 0.06);
+
+    --dc-accent-cyan: #00e5ff;
 }
 
 body.light-theme {
@@ -106,6 +131,14 @@ body.light-theme {
     --border-accent-orange: #fac3a2;
     --border-accent-green: #9de3c7;
     --border-accent-red: #f3a7b0;
+
+    --dc-card-bg: #ffffff;
+    --dc-card-border: rgba(0, 0, 0, 0.08);
+    --dc-row-bg: #f1f5f9;
+    --dc-row-border: rgba(0, 0, 0, 0.05);
+    --dc-track-bg: rgba(0, 0, 0, 0.06);
+
+    --dc-accent-cyan: #0284c7;
 }
 
 .authenticated-layout {
@@ -115,5 +148,102 @@ body.light-theme {
     ion-content {
         --background: transparent;
         --color: var(--text-primary);
+    }
+}
+
+.dc-card-grid {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "card1"
+        "card2"
+        "card3";
+
+    @media (min-width: 901px) and (max-width: 1400px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+            "card1 card3"
+            "card2 card2";
+    }
+
+    @media (min-width: 1401px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: 
+            "card1 card2 card3";
+    }
+
+    .grid-area-1 { grid-area: card1; }
+    .grid-area-2 { grid-area: card2; }
+    .grid-area-3 { grid-area: card3; }
+}
+
+.dc-card {
+    background: var(--dc-card-bg);
+    border: 1px solid var(--dc-card-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    .dc-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+
+            //?no funciona del todo bien desde el global, copiar valores de subtitle y title manualmente en cada archivo scss con tarjetas que lo necesite
+            .dc-card-subtitle {
+                color: var(--dc-accent-cyan);
+                font-size: 0.68rem;
+                font-weight: 800;
+                letter-spacing: 0.8px;
+                text-transform: uppercase;
+            }
+
+            .dc-card-title {
+                color: var(--text-primary);
+                font-size: 1.15rem;
+                font-weight: 700;
+                margin: 0;
+            }
+        }
+
+        .dc-btn-action {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(var(--dc-accent-cyan));
+            color: var(--dc-accent-cyan);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background: var(--dc-accent-cyan);
+                color: var(--text-primary);
+            }
+        }
+    }
+
+    .dc-card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
 }

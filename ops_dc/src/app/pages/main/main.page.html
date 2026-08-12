@@ -1,5 +1,5 @@
 <ion-split-pane content-id="main-content" class="authenticated-layout">
-  <ion-menu contentId="main-content" type="overlay" class="custom-sidebar">
+  <ion-menu contentId="main-content" type="push" class="custom-sidebar">
     <ion-content class="sidebar-content">
       <div class="sidebar-header">
         <div class="logo-box"></div>
@@ -23,7 +23,7 @@
 
         <div class="nav-category">PRINCIPAL</div>
 
-        <a class="nav-item active" routerLink="/main/home" routerDirection="root">
+        <a class="nav-item" routerLink="/main/home" routerDirection="root" routerLinkActive="active">
           <ion-icon name="square" class="icon-cyan-small"></ion-icon>
           <span class="nav-text">Inicio / Panel</span>
         </a>
