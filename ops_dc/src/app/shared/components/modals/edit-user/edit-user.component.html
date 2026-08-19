@@ -1,0 +1,47 @@
+<div class="edit-modal-container">
+  <div class="modal-header">
+    <div class="header-title">
+      <ion-icon name="person-outline"></ion-icon>
+      <h2>Editar Datos de Usuario</h2>
+    </div>
+    <button class="btn-close" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+  </div>
+  <div class="user-info-card">
+    <p class="user-name">{{ user.name }}</p>
+    <p class="user-email">{{ user.email }}</p>
+    <span class="ldap-note">Datos personales administrados por la empresa</span>
+  </div>
+  <div class="form-body">
+    <div class="form-group">
+      <label for="roleSelect">Rol Asignado</label>
+      <div class="select-wrapper">
+        <select id="roleSelect" [(ngModel)]="selectedRole" class="custom-select">
+          @for (role of roles; track role.value) {
+            <option [value]="role.value">{{ role.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <div class="form-group toggle-card">
+      <div class="toggle-info">
+        <label>Estado de la cuenta</label>
+        <span [class.active]="isActive" [class.inactive]="!isActive">
+          {{ isActive ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="isActive">
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn-cancel" (click)="closeModal()" [disabled]="isSaving">Cancelar</button>
+    <button class="btn-save" (click)="saveChanges()" [disabled]="isSaving">
+      <ion-icon name="save-outline"></ion-icon>
+      {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
+    </button>
+  </div>
+</div>

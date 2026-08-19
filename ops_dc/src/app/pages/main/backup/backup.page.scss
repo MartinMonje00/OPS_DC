@@ -1,0 +1,112 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.dc-card {
+    height: auto;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.table-container {
+    width: 100%;
+    border: 1px solid var(--dc-card-border);
+    border-radius: 8px;
+    overflow-x: auto;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.dc-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.875rem;
+
+    thead {
+        tr {
+            border-bottom: 1px solid var(--dc-card-border);
+        }
+
+        th {
+            color: var(--dc-accent-cyan);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05rem;
+            padding: 0.9rem 1.25rem;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.02);
+            }
+        }
+
+        td {
+            padding: 0.9rem 1.25rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        .col-file {
+            width: 50%;
+
+            .file-name {
+                font-family: monospace;
+                color: #e2e8f0;
+            }
+        }
+
+        .col-date,
+        .col-size {
+            color: #cbd5e1;
+        }
+
+        .col-actions {
+            text-align: right;
+            width: 80px;
+
+            .btn-table-action {
+                background: transparent;
+                border: none;
+                color: var(--dc-accent-cyan);
+                font-size: 1.2rem;
+                cursor: pointer;
+                padding: 0.3rem;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: rgba(0, 229, 255, 0.1);
+                }
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #94a3b8;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+    }
+}

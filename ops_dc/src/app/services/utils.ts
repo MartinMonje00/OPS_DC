@@ -1,13 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { Router, TitleStrategy, UrlTree } from '@angular/router';
-import { AlertController, LoadingController, ModalController, ModalOptions, NavController, ToastController, ToastOptions } from '@ionic/angular/standalone';
+import { Router, UrlTree } from '@angular/router';
+import { AlertController, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular/standalone';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilsService {
   private router = inject(Router);
-  private navCtrl = inject(NavController);
 
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
@@ -69,6 +68,7 @@ export class UtilsService {
       const alert = await this.alertCtrl.create({
         header: opts.header,
         message: opts.message,
+        cssClass: 'custom-alert',
         buttons: [
           { text: opts.cancelText, role: 'cancel', handler: () => resolve(false) },
           { text: opts.confirmText, role: 'confirm', handler: () => resolve(true) }

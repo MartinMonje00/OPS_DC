@@ -41,11 +41,9 @@ export class CurrencyModalComponent  implements OnInit {
 
   loadHistory() {
     this.isLoading = true;
-    console.log('Solicitando historial para:', this.indicatorType);
 
     this.indicatorsSvc.getIndicatorHistory(this.indicatorType).subscribe({
       next: (data) => {
-        console.log('Datos recibidos con exito:', data);
         this.historyList = data;
         this.isLoading = false;
       },

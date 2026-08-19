@@ -16,6 +16,7 @@ import {
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth';
 import { ThemeService } from 'src/app/services/theme';
+import { UserdataService } from 'src/app/services/userdata';
 import { UtilsService } from 'src/app/services/utils';
 
 @Component({
@@ -34,8 +35,13 @@ export class MainPage implements OnInit {
   private router = inject(Router);
 
   public themeSvc = inject(ThemeService);
+  private userDataSvc = inject(UserdataService);
 
   isDatacenterExpanded = signal<boolean>(false);
+
+  user = this.userDataSvc.currentUser;
+  initials = this.userDataSvc.currentUserInitials;
+  theme = this.userDataSvc.currentUserTheme;
 
   constructor() {
     addIcons({

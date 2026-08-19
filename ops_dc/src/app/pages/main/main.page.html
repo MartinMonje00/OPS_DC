@@ -2,15 +2,17 @@
   <ion-menu contentId="main-content" type="push" class="custom-sidebar">
     <ion-content class="sidebar-content">
       <div class="sidebar-header">
-        <div class="logo-box"></div>
+        <div class="logo-box">
+          <img src="../../../assets/icon/logo.png" alt="Logo de S&A Chile" class="brand-logo">
+        </div>
         <span class="logo-title">S&A Business Hub</span>
       </div>
 
-      <div class="user-card">
-        <div class="user-avatar">MM</div>
+      <div class="user-card" [style.border-left-color]="theme().accentColor">
+        <div class="user-avatar" [style.background]="theme().avatarBgColor">{{ initials() }}</div>
         <div class="user-info">
-          <span class="user-name">Martin Monje</span>
-          <span class="user-role">Administrador</span>
+          <span class="user-name">{{ user()?.name }}</span>
+          <span class="user-role" [style.color]="theme().accentColor">{{ theme().roleLabel }}</span>
         </div>
       </div>
 
@@ -108,7 +110,7 @@
         </a>
         -->
 
-        <a class="nav-item" routerLink="">
+        <a class="nav-item" routerLink="/main/contacts" routerLinkActive="active">
           <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
           <span class="nav-text">Contactos</span>
         </a>
@@ -130,12 +132,14 @@
         </a>
         -->
 
-        <a class="nav-item" routerLink="">
-          <ion-icon name="download-outline" class="icon-cyan"></ion-icon>
-          <span class="nav-text">Respaldos</span>
-        </a>
+        @if (isAdmin()) {
+          <a class="nav-item" routerLink="/main/backup" routerLinkActive="active">
+            <ion-icon name="download-outline" class="icon-cyan"></ion-icon>
+            <span class="nav-text">Respaldos</span>
+          </a>
+        }
 
-        <a class="nav-item" routerLink="">
+        <a class="nav-item" href="https://syachile.cl/recursos/" target="_blank" rel="noopener noreferrer">
           <ion-icon name="flash-outline" class="icon-orange"></ion-icon>
           <span class="nav-text">Recursos y Salas</span>
         </a>
@@ -143,7 +147,7 @@
         @if (isAdmin()) {
           <div class="nav-category">ADMINISTRACIÓN</div>
 
-          <a class="nav-item" routerLink="">
+          <a class="nav-item" routerLink="/main/users" routerLinkActive="active">
             <ion-icon name="people-outline" class="icon-purple"></ion-icon>
             <span class="nav-text">Usuarios</span>
           </a>
