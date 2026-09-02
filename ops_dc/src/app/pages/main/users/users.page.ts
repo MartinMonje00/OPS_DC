@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonIcon } from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared-module';
@@ -8,7 +8,6 @@ import { UserdataService, User } from 'src/app/services/userdata';
 import { addOutline, checkmarkOutline, closeOutline, pencilOutline } from 'ionicons/icons';
 import { UtilsService } from 'src/app/services/utils';
 import { EditUserComponent } from 'src/app/shared/components/modals/edit-user/edit-user.component';
-import { CreateUserComponent } from 'src/app/shared/components/modals/create-user/create-user.component';
 
 @Component({
   selector: 'app-users',
@@ -17,7 +16,7 @@ import { CreateUserComponent } from 'src/app/shared/components/modals/create-use
   standalone: true,
   imports: [
     CommonModule, FormsModule, SharedModule, IonContent, IonIcon,
-
+    DatePipe
   ]
 })
 export class UsersPage implements OnInit {
@@ -37,15 +36,8 @@ export class UsersPage implements OnInit {
     this.loadUsers();
   }
 
-  async openCreateModal(): Promise<void> {
-    const res = await this.utilsSvc.presentModal({
-      component: CreateUserComponent,
-      cssClass: 'custom-create-user-modal'
-    });
-
-    if (res && res.created) {
-      this.loadUsers();
-    }
+  ionViewWillEnter(): void {
+    this.loadUsers();
   }
 
   async openEditModal(user: User): Promise<void> {

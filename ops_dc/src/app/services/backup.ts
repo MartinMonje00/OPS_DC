@@ -28,16 +28,16 @@ export class BackupService {
 
   getBackups(): Observable<DatabaseBackup[]> {
     return this.http.get<DatabaseBackup[]>(this.apiUrl, {
-      headers: this.getHeaders()
+      headers: this.utilsSvc.getHeaders()
     });
   }
 
   generateBackup(): Observable<{ message?: string; filename?: string }> {
-    return this.http.post<{ message?: string; filename?: string }>(`${this.apiUrl}/create`, {}, { headers: this.getHeaders() });
+    return this.http.post<{ message?: string; filename?: string }>(`${this.apiUrl}/create`, {}, { headers: this.utilsSvc.getHeaders() });
   }
 
   downloadBackup(filename: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/download/${filename}`,
-      { headers: this.getHeaders(), responseType: 'blob' });
+      { headers: this.utilsSvc.getHeaders(), responseType: 'blob' });
   }
 }

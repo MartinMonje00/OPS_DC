@@ -56,8 +56,9 @@
                                         {{ item.sizeKb }} KB
                                     </td>
                                     <td class="col-actions">
-                                        <button type="button" class="btn-table-action" (click)="downloadBackup(item)" title="Descargar archivo .sql"></button>
-                                        <ion-icon name="download-outline"></ion-icon>
+                                        <button type="button" class="btn-table-action" (click)="downloadBackup(item)" title="Descargar archivo .sql">
+                                            <ion-icon name="download-outline"></ion-icon>
+                                        </button>
                                     </td>
                                 </tr>
                             } @empty {

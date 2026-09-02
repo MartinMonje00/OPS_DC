@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { AlertController, LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular/standalone';
@@ -75,6 +76,13 @@ export class UtilsService {
         ]
       });
       await alert.present();
+    });
+  }
+
+  getHeaders(): HttpHeaders {
+    const token = this.getFromLocalStorage('Token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
     });
   }
 }

@@ -3,10 +3,6 @@
 <ion-content class="ion-padding full-width-content">
   <div class="page-top-bar">
     <h1 class="page-title">Administración de usuarios</h1>
-    <button class="btn-create" (click)="openCreateModal()">
-      <ion-icon name="add-outline"></ion-icon>
-      Crear Usuario
-    </button>
   </div>
 
   <div class="dc-card">
@@ -57,7 +53,7 @@
                 </span>
               </td>
 
-              <td class="text-muted">{{ user.lastAccess || 'Sin registro' }}</td>
+              <td class="text-muted">{{ user.lastAccess ? (user.lastAccess | date:'dd-MM-yyyy HH:mm') : 'Sin registro' }}</td>
 
               <td class="text-right">
                 <button class="btn-action-edit" (click)="openEditModal(user)">

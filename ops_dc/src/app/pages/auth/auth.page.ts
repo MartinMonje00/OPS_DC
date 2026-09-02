@@ -42,7 +42,7 @@ export class AuthPage {
 
     try {
       const res = await this.authSvc.signIn({
-        email: username!,
+        username: username!,
         password: password!
       });
 

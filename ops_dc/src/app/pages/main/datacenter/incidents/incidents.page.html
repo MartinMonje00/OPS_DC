@@ -1,1 +1,67 @@
+<div class="dc-card grid-area-1">
+    <div class="dc-card-header">
+        <div class="dc-header-title">
+            <span class="dc-card-subtitle">CONTINUIDAD</span>
+            <h2 class="dc-card-title">Incidentes recientes</h2>
+        </div>
 
+        <div class="header-actions">
+            <button type="button" class="btn-primary" (click)="openIncidentModal()">
+                + Incidente
+            </button>
+        </div>
+    </div>
+
+    <div class="dc-card-body">
+        <div class="incidents-list">
+            @if (isLoading()) {
+                <div class="state-message">Cargando datos desde el servidor...</div>
+            } @else if (incidents().length === 0) {
+                <div class="state-message">No se encontraron incidentes de los últimos 30 días</div>
+            } @else {
+                @for (item of incidents(); track item.id || $index) {
+                    <div class="incident-row" [class.is-open]="item.state?.toLowerCase() !== 'cerrado'">
+                        <div class="incident-info">
+                            <h3 class="incident-name">{{ item.name }}</h3>
+
+                            <p class="incident-sub">
+                                {{ item.affected_service || 'Servicio no indicado' }}
+                                @if (item.type) {
+                                    · {{ item.type }}
+                                }
+                            </p>
+
+                            <p class="incident-meta">
+                                Inicio {{ item.startedAt | date:'dd-MM-yyyy HH:mm' }}
+                                · {{ item.state?.toLowerCase() === 'cerrado' ? ('Duración ' + (item.duration || 0) + ' min') : 'En curso' }}
+                                · {{ (item.affect === 1 || item.affect === true) ? 'Impacta disponibilidad' : 'Informativo' }}
+                            </p>
+
+                            @if (item.description) {
+                                <p class="incident description">
+                                    {{ item.description }}
+                                </p>
+                            }
+                        </div>
+
+                        <div class="incident-actions">
+                            <div class="card-badges">
+                                <span class="badge severity" [ngClass]="item.severity?.toLowerCase()">
+                                    {{ item.severity | titlecase }}
+                                </span>
+
+                                <span class="badge status" [ngClass]="item.state?.toLowerCase() || 'abierto'">
+                                    {{ (item.state || 'Abierto') | titlecase }}
+                                </span>
+                            </div>
+
+                            @if (item.state?.toLowerCase() !== 'cerrado') {
+                                <button type="button" class="btn-close-incident" (click)="confirmCloseIncident(item)">Cerrar</button>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

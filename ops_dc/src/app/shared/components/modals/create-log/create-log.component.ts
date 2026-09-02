@@ -1,14 +1,130 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IonContent, IonIcon } from '@ionic/angular/standalone';
+import { CustomAppInputComponent } from '../../custom-app-input/custom-app-input.component';
+import { UtilsService } from 'src/app/services/utils';
+import { DataService } from 'src/app/services/data';
+import { addIcons } from 'ionicons';
+import { chevronDownOutline, closeOutline, documentTextOutline } from 'ionicons/icons';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-create-log',
   templateUrl: './create-log.component.html',
   styleUrls: ['./create-log.component.scss'],
+  standalone: true,
+  imports: [
+    IonContent, IonIcon, ReactiveFormsModule, CustomAppInputComponent
+  ]
 })
 export class CreateLogComponent  implements OnInit {
+  @Input() logData?: any;
 
-  constructor() { }
+  private fb = inject(FormBuilder);
+  private utilsSvc = inject(UtilsService);
+  private dataSvc = inject(DataService);
 
-  ngOnInit() {}
+  form!: FormGroup;
+  isEditMode = false;
 
+  logCategories = [
+    { value: 'general', label: 'General' },
+    { value: 'visita', label: 'Visita' },
+    { value: 'mantenimiento', label: 'Mantenimiento' },
+    { value: 'seguridad', label: 'Seguridad' },
+    { value: 'operacion', label: 'Operación' }
+  ];
+
+  logStates = [
+    { values: 'abierto', label: 'Abierto' },
+    { values: 'archivado', label: 'Archivado' },
+    { values: 'cerrado', label: 'Cerrado' }
+  ];
+
+  constructor() {
+    addIcons({
+      closeOutline, documentTextOutline, chevronDownOutline
+    });
+  }
+
+  ngOnInit() {
+    this.isEditMode = !!this.logData;
+
+    if (this.isEditMode) {
+      this.form = this.fb.group({
+        description: [this.logData?.description || '', [Validators.required, Validators.maxLength(255)]],
+        state: [this.logData?.state || 'abierto', [Validators.required]]
+      });
+    } else {
+      this.form = this.fb.group({
+        title: ['', [Validators.required, Validators.maxLength(25)]],
+        category: ['general'],
+        description: ['', [Validators.required, Validators.maxLength(255)]],
+        state: ['abierto', [Validators.required]]
+      });
+    }
+  }
+
+  getFormControl(name: string): FormControl {
+    return (this.form?.get(name) as FormControl) || new FormControl('');
+  }
+
+  closeModal(): void {
+    this.utilsSvc.dismissModal();
+  }
+
+  async saveLog(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const loading = await this.utilsSvc.loading();
+    await loading.present();
+
+    try {
+      const formVal = this.form.value;
+      let payload: any;
+
+      if (this.isEditMode) {
+        payload = {
+          if: this.logData.id,
+          description: formVal.description.trim(),
+          state: formVal.state
+        };
+      } else {
+        const user = this.utilsSvc.getFromLocalStorage('user');
+
+        payload = {
+          user_id: user?.id,
+          title: formVal.title.trim(),
+          category: formVal.category,
+          description: formVal.description.trim(),
+          state:formVal.state
+        };
+      }
+
+      const response: any = await firstValueFrom(this.dataSvc.saveLogbook(payload));
+      await loading.dismiss();
+
+      this.utilsSvc.presentToast({
+        message: response?.message || (this.isEditMode ? 'Bitacora actualizada' : 'Bitacora registrada'),
+        duration: 2000,
+        color: 'success',
+        position: 'middle'
+      });
+
+      this.utilsSvc.dismissModal({ success: true });
+    } catch (error: any) {
+      await loading.dismiss();
+      const errorMsg = error?.error?.message || error?.message || 'error al procesar la bitácora';
+
+      this.utilsSvc.presentToast({
+        message: errorMsg,
+        duration: 2500,
+        color: 'danger',
+        position: 'middle'
+      });
+    }
+  }
 }

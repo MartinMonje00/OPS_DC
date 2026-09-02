@@ -1,3 +1,76 @@
-<p>
-  create-incident works!
-</p>
+<div class="modal-card">
+    <div class="modal-header">
+        <div class="header-title">
+            <h2>Reportar Incidente</h2>
+            <p class="subtitle">Registra una anomalía u operativa crítica en el sistema.</p>
+        </div>
+        <button type="button" class="btn-close" (click)="closeModal()">
+            <ion-icon name="close-outline"></ion-icon>
+        </button>
+    </div>
+
+    <form [formGroup]="form" class="form-body" (ngSubmit)="saveIncident()">
+        <app-custom-app-input
+            [control]="getFormControl('name')"
+            type="text"
+            label="Titulo del Incidente"
+            autocomplete="off">
+        </app-custom-app-input>
+    
+        <app-custom-app-input
+            [control]="getFormControl('type')"
+            type="text"
+            label="Tipo"
+            autocomplete="off">
+        </app-custom-app-input>
+
+        <app-custom-app-input
+            [control]="getFormControl('affected_service')"
+            type="text"
+            label="Servicio afectado"
+            autocomplete="off">
+        </app-custom-app-input>
+
+        <div class="inline-grid">
+            <div class="custom-select-box">
+                <select formControlName="severity" class="native-select">
+                    @for (s of severities; track s.value) {
+                        <option [value]="s.value">Severidad {{ s.label }}</option>
+                    }
+                </select>
+                <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+            </div>
+
+            <div class="custom-date-time-box">
+                <input type="datetime-local" formControlName="startedAt" class="native-datetime" />
+            </div>
+        </div>
+
+        <div class="inline-grid">
+            <div class="custom-datetime-box">
+                <input type="datetime-local" formControlName="endedAt" class="native-datetime" />
+            </div>
+
+            <div class="checkbox-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" formControlName="affect" class="native-checkbox" />
+                    <span>Afecta disponibilidad</span>
+                </label>
+            </div>
+        </div>
+
+        <app-custom-app-input
+            [control]="getFormControl('description')"
+            type="text"
+            label="Descripcion breve"
+            autocomplete="off">
+        </app-custom-app-input>
+
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+            <button type="submit" class="btn-submit" [disabled]="form.invalid">
+                Registrar incidente
+            </button>
+        </div>
+    </form>
+</div>

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UtilsService } from './utils';
-import { CreateUserDto } from './createuser';
 
 export interface User {
   id?: string;
@@ -36,8 +35,6 @@ export class UserdataService {
 
   private readonly apiUrl = `${environment.apiAuth}/api/auth/users`;
   private readonly updateUrl = `${environment.apiAuth}/api/users/update`;
-
-  private readonly createUrl = `${environment.apiAuth}/api/users/register`;
 
   currentUser = signal<User | null>(this.utilsSvc.getFromLocalStorage('User'));
 
@@ -121,25 +118,18 @@ export class UserdataService {
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<any[]>(this.apiUrl, {
-      headers: this.getHeaders()
+      headers: this.utilsSvc.getHeaders()
     }).pipe(
       map(users => users.map(rawUser => {
-        const { active, isActive, user_id, id, ...rest } = rawUser;
+        const { active, isActive, user_id, id, last_login, ...rest } = rawUser;
 
         return {
           ...rest,
           id: id || user_id,
-          isActive: active !== undefined ? Boolean(Number(active)) : Boolean(Number(isActive))
+          isActive: active !== undefined ? Boolean(Number(active)) : Boolean(Number(isActive)),
+          lastAccess: last_login || null
         } as User;
       }))
-    );
-  }
-
-  createUser(data: CreateUserDto): Observable<{ code: string; message: string; user?: any }> {
-    return this.http.post<{ code: string; message: string; user?: any }>(
-      this.createUrl,
-      data,
-      { headers: this.getHeaders() }
     );
   }
 
@@ -157,7 +147,7 @@ export class UserdataService {
     return this.http.put<{ message: string; updatedFields?: any }>(
       `${this.updateUrl}/${user_id}`,
       payload,
-      { headers: this.getHeaders() }
+      { headers: this.utilsSvc.getHeaders() }
     );
   }
 }

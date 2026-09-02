@@ -11,6 +11,36 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+
+    .dc-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: var(--dc-accent-cyan);
+        color: #09121d;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        ion-icon {
+            font-size: 1.1rem;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
 }
 
 .table-container {
@@ -18,7 +48,7 @@
     border: 1px solid var(--dc-card-border);
     border-radius: 8px;
     overflow-x: auto;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: var(--dc-row-bg);
 }
 
 .dc-table {
@@ -45,14 +75,14 @@
 
     tbody {
         tr {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--dc-row-border);
 
             &:last-child {
                 border-bottom: none;
             }
 
             &:hover {
-                background-color: rgba(255, 255, 255, 0.02);
+                background-color: var(--dc-track-bg);
             }
         }
 
@@ -67,13 +97,14 @@
 
             .file-name {
                 font-family: monospace;
-                color: #e2e8f0;
+                color: var(--text-primary);
+                font-weight: 600;
             }
         }
 
         .col-date,
         .col-size {
-            color: #cbd5e1;
+            color: var(--text-secondary);
         }
 
         .col-actions {
@@ -81,16 +112,20 @@
             width: 80px;
 
             .btn-table-action {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
                 background: transparent;
                 border: none;
                 color: var(--dc-accent-cyan);
-                font-size: 1.2rem;
+                font-size: 1.25rem;
                 cursor: pointer;
-                padding: 0.3rem;
+                padding: 0.35rem;
                 border-radius: 4px;
+                transition: background-color 0.2s ease;
 
                 &:hover {
-                    background-color: rgba(0, 229, 255, 0.1);
+                    background-color: var(--dc-track-bg);
                 }
             }
         }

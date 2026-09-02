@@ -21,7 +21,7 @@ export class AuthService {
 
     currentUser = signal<User | null>(this.utilsSvc.getFromLocalStorage('User'));
 
-    async signIn(credentials: { email: string, password?: string }): Promise<UserSession> {
+    async signIn(credentials: { username: string, password?: string }): Promise<UserSession> {
         try {
             const response = await firstValueFrom(
                 this.http.post<UserSession>(`${this.apiUrl}/login`, credentials)

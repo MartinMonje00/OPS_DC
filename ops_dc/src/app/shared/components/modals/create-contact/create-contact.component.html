@@ -1,3 +1,77 @@
-<p>
-  create-contact works!
-</p>
+<div class="modal-card">
+  <div class="modal-header">
+    <div class="header-title">
+      <ion-icon [name]="isEditMode ? 'create-outline' : 'person-add-outline'" class="header-icon"></ion-icon>
+      <h2>{{ isEditMode ? 'Editar Contacto' : 'Nuevo Contacto' }}</h2>
+    </div>
+    <button type="button" class="btn close" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div class="modal-divider"></div>
+
+  <form [formGroup]="form" class="form-body" (ngSubmit)="saveContact()">
+    <div class="input-grid">
+      <app-custom-app-input
+      [control]="getFormControl('name')"
+      type="text"
+      label="Nombre Completo"
+      icon="person-outline"
+      autocomplete="off">
+      </app-custom-app-input>
+
+      <app-custom-app-input
+      [control]="getFormControl('company')"
+      type="text"
+      label="Empresa"
+      icon="business-outline"
+      autocomplete="off">
+      </app-custom-app-input>
+
+      <app-custom-app-input
+      [control]="getFormControl('charge')"
+      type="text"
+      label="Cargo"
+      icon="briefcase-outline"
+      autocomplete="off">
+      </app-custom-app-input>
+
+      <app-custom-app-input
+      [control]="getFormControl('email')"
+      type="text"
+      label="Correo Electrónico"
+      icon="mail-outline"
+      autocomplete="off">
+      </app-custom-app-input>
+
+      <app-custom-app-input
+      [control]="getFormControl('telephone')"
+      type="text"
+      label="Teléfono"
+      icon="call-outline"
+      autocomplete="off">
+      </app-custom-app-input>
+    </div>
+
+    <div class="custom-select-box">
+      <label class="section-label">TIPO DE CONTACTO</label>
+      <div class="select-container">
+        <select formControlName="type" class="native-select">
+          @for (t of contactTypes; track t.value) {
+            <option [value]="t.value">{{ t.label }}</option>
+          }
+        </select>
+        <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="form.invalid">
+        <ion-icon [name]="isEditMode ? 'save-outline' : 'add-circle-outline'"></ion-icon>
+        <span>{{ isEditMode ? 'Guardar Cambios' : 'Registrar Contacto' }}</span>
+      </button>
+    </div>
+  </form>
+</div>

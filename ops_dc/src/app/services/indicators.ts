@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, OnDestroy, signal } from '@angular/core';
-import { map, Observable, Subscription, switchMap, timer } from 'rxjs';
+import { map, Observable, Subscription, timer } from 'rxjs';
 
 export interface WeatherData {
   city: string;
@@ -28,7 +28,7 @@ export interface HistoryRecord {
 const WMO_WEATHER_MAP: Record<number, WeatherConfig> = {
   0: { description: 'Despejado', dayIcon: 'sunny-outline', nightIcon: 'moon-outline', color: '#f59e0b' },
 
-  1: { description: 'Algo nublado', dayIcon: 'partly-sunny-outline', nightIcon: 'cloudy-night-outline', color: '#38dbf8' },
+  1: { description: 'Ligeramente nublado', dayIcon: 'partly-sunny-outline', nightIcon: 'cloudy-night-outline', color: '#38dbf8' },
   2: { description: 'Parcialmente nublado', dayIcon: 'partly-sunny-outline', nightIcon: 'cloudy-night-outline', color: '#38dbf8' },
 
   3: { description: 'Nublado', dayIcon: 'cloudy-outline', nightIcon: 'cloudy-outline', color: '#94a3b8' },
