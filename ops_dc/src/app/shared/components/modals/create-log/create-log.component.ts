@@ -36,9 +36,9 @@ export class CreateLogComponent  implements OnInit {
   ];
 
   logStates = [
-    { values: 'abierto', label: 'Abierto' },
-    { values: 'archivado', label: 'Archivado' },
-    { values: 'cerrado', label: 'Cerrado' }
+    { value: 'abierto', label: 'Abierto' },
+    { value: 'archivado', label: 'Archivado' },
+    { value: 'cerrado', label: 'Cerrado' }
   ];
 
   constructor() {
@@ -84,27 +84,42 @@ export class CreateLogComponent  implements OnInit {
 
     try {
       const formVal = this.form.value;
-      let payload: any;
+      let request$;
 
       if (this.isEditMode) {
-        payload = {
-          if: this.logData.id,
+        const logId = this.logData.logId || this.logData.id || this.logData.log_id
+
+        if (!logId) {
+          await loading.dismiss();
+          this.utilsSvc.presentToast({
+            message: 'No se pudo verificar el ID del registo a modificar',
+            duration: 2500,
+            color: 'danger',
+            position: 'middle'
+          });
+        }
+
+        const payload = {
           description: formVal.description.trim(),
           state: formVal.state
         };
+
+        request$ = this.dataSvc.updateLogbook(logId, payload);
       } else {
         const user = this.utilsSvc.getFromLocalStorage('user');
 
-        payload = {
+        const payload = {
           user_id: user?.id,
           title: formVal.title.trim(),
           category: formVal.category,
           description: formVal.description.trim(),
           state:formVal.state
         };
+
+        request$ = this.dataSvc.saveLogbook(payload);
       }
 
-      const response: any = await firstValueFrom(this.dataSvc.saveLogbook(payload));
+      const response: any = await firstValueFrom(request$);
       await loading.dismiss();
 
       this.utilsSvc.presentToast({

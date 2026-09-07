@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IonContent, IonIcon, ViewWillEnter } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { addOutline } from 'ionicons/icons';
+import { ViewWillEnter } from '@ionic/angular/standalone';
 import { DataService } from 'src/app/services/data';
 import { UtilsService } from 'src/app/services/utils';
 import { CreateIncidentComponent } from 'src/app/shared/components/modals/create-incident/create-incident.component';
@@ -13,7 +11,7 @@ import { CreateIncidentComponent } from 'src/app/shared/components/modals/create
   styleUrls: ['./incidents.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonIcon, CommonModule
+    CommonModule
   ]
 })
 export class IncidentsPage implements OnInit, ViewWillEnter {
@@ -22,12 +20,6 @@ export class IncidentsPage implements OnInit, ViewWillEnter {
 
   incidents = signal<any[]>([]);
   isLoading = signal<boolean>(false);
-
-  constructor() {
-    addIcons({
-      addOutline
-    })
-  }
 
   ngOnInit() {
     this.getIncidents();

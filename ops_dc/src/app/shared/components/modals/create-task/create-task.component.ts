@@ -67,13 +67,15 @@ export class CreateTaskComponent  implements OnInit {
     try {
       const formVal = this.form.value;
       const payload = {
-        name: formVal.name.trim(),
+        name: formVal.name ? formVal.name.trim() : '',
         description: formVal.description ? formVal.description.trim() : null,
         priority: formVal.priority,
         date: formVal.date ? formVal.date : null
       };
 
-      const response: any = await firstValueFrom(this.dataSvc.saveTasks(payload));
+      console.log('PAYLOAD ENVIADO A LA API:', payload);
+
+      const response: any = await firstValueFrom(this.dataSvc.saveTask(payload));
 
       await loading.dismiss();
 
@@ -87,6 +89,10 @@ export class CreateTaskComponent  implements OnInit {
       this.utilsSvc.dismissModal({ success: true });
     } catch (error: any) {
       await loading.dismiss();
+
+      console.error('ERROR DEVUELTO POR LA API:', error);
+      console.error('DETALLE JSON:', error?.error);
+
       const errorMsg = error?.error?.message || error?.message || 'Error al guardar la tarea';
       this.utilsSvc.presentToast({
         message: errorMsg,

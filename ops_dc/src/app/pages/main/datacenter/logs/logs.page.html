@@ -1,1 +1,62 @@
+<div class="dc-card grid-area-1">
+    <div class="dc-card-header">
+        <div class="dc-header-title">
+            <span class="dc-card-subtitle">REGISTRO DE ACTIVIDAD</span>
+            <h2 class="dc-card-title">Bitácora de operaciones</h2>
+        </div>
 
+        <div class="header-actions">
+            <button type="button" class="dc-btn-action" (click)="openLogsModal()">
+                <ion-icon name="add-outline"></ion-icon>
+                <span>Nueva bitácora</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="dc-card-body">
+        <div class="logs-list">
+            @if (isLoading()) {
+                <div class="state-message">Cargando datos desde el servidor...</div>
+            } @else if (logs().length === 0) {
+                <div class="state-message">No se encontro ningun registro de bitácora de los ultimos 30 dias</div>
+            } @else {
+                @for (item of logs(); track item.log_id || item.id || $index) {
+                    <div class="log-row" [class.is-closed]="item.state?.toLowerCase() === 'cerrado'">
+                        <div class="log-info">
+                            <h3 class="log-title">{{ item.title }}</h3>
+
+                            <p class="log-sub">
+                                Categoria: {{ item.category || 'General' | titlecase }}
+                                · Registrado {{ item.createdAt | date:'dd-MM-yyyy HH:mm' }}
+                            </p>
+
+                            @if (item.description) {
+                                <p class="log-description">
+                                    {{ item.description }}
+                                </p>
+                            }
+                        </div>
+                        <div class="log-actions">
+                            <div class="card-badges">
+                                <span class="badge status" [ngClass]="item.state?.toLowerCase() || 'abierto'">
+                                    {{ (item.state || 'Abierto') | titlecase }}
+                                </span>
+                            </div>
+
+                            @if (item.state?.toLowerCase() !== 'cerrado') {
+                                <button type="button" class="btn-edit-log" (click)="openLogsModal(item)">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                    <span>Editar</span>
+                                </button>
+                            } @else {
+                                <span class="badge-locked">
+                                    <ion-icon name="lock-closed-outline"></ion-icon> Cerrado
+                                </span>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
