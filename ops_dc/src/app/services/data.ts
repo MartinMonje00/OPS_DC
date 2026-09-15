@@ -63,4 +63,8 @@ export class DataService {
   updateLogbook(id: string, logbookData: any): Observable<any> {
     return this.http.patch(`${this.apiUrl}/logBook/${id}`, logbookData, { headers: this.utilsSvc.getHeaders() });
   }
+
+  getDashboardData(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/Dashboard`, { headers: this.utilsSvc.getHeaders() });
+  }
 }

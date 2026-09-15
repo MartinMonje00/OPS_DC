@@ -172,24 +172,41 @@ body.light-theme {
     grid-template-areas: 
         "card1"
         "card2"
-        "card3";
+        "card3"
+        "card4"
+        "card5"
+        "card6"
+        "card7"
+        "card8"
+        "card9";
 
     @media (min-width: 901px) and (max-width: 1400px) {
         grid-template-columns: repeat(2, 1fr);
         grid-template-areas: 
-            "card1 card3"
-            "card2 card2";
+            "card1 card2"
+            "card3 card4"
+            "card5 card6"
+            "card7 card9"
+            "card8 card8";
     }
 
     @media (min-width: 1401px) {
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas: 
-            "card1 card2 card3";
+            "card1 card2 card3"
+            "card4 card5 card6"
+            "card7 card8 card9";
     }
 
     .grid-area-1 { grid-area: card1; }
     .grid-area-2 { grid-area: card2; }
     .grid-area-3 { grid-area: card3; }
+    .grid-area-4 { grid-area: card4; }
+    .grid-area-5 { grid-area: card5; }
+    .grid-area-6 { grid-area: card6; }
+    .grid-area-7 { grid-area: card7; }
+    .grid-area-8 { grid-area: card8; }
+    .grid-area-9 { grid-area: card9; }
 }
 
 .dc-card {
