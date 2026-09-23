@@ -5,23 +5,23 @@
     <div class="stats-grid">
       <div class="stat-card border-green">
         <span class="stat-label">Disponibilidad Mensual</span>
-        <span class="stat-value">100% (datos estaticos de prueba)</span>
-        <span class="stat-subtext">0 min caidos (datos estaticos de prueba)</span>
+        <span class="stat-value">{{ stateSvc.monthlyAvailabilityFormatted() }}</span>
+        <span class="stat-subtext">{{ stateSvc.downTime() }} min caidos</span>
       </div>
       <div class="stat-card border-red">
         <span class="stat-label">Incidentes</span>
-        <span class="stat-value">1 (datos estaticos de prueba)</span>
-        <span class="stat-subtext">0 del mes (datos estaticos de prueba)</span>
+        <span class="stat-value">{{ stateSvc.incidentsCount() }}</span>
+        <span class="stat-subtext">{{ stateSvc.monthlyIncidentsCount() }} del mes</span>
       </div>
       <div class="stat-card border-amber">
         <span class="stat-label">Tareas Pendientes</span>
-        <span class="stat-value">2 (datos estaticos de prueba)</span>
-        <span class="stat-subtext">0 proximos (datos estaticos de prueba)</span>
+        <span class="stat-value">{{ stateSvc.pendingTasksCount() }}</span>
+        <span class="stat-subtext">{{ stateSvc.pendingNextTasksCount() }} proximos</span>
       </div>
       <div class="stat-card border-cyan">
         <span class="stat-label">Ultima Temperatura</span>
-        <span class="stat-value">21,8°C (datos estaticos de prueba)</span>
-        <span class="stat-subtext">Sala Principal (datos estaticos de prueba)</span>
+        <span class="stat-value">21,8°C (Datos estaticos de prueba)</span>
+        <span class="stat-subtext">Sala Principal (Datos estaticos de prueba)</span>
       </div>
     </div>
 

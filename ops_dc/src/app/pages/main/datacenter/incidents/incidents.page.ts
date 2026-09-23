@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular/standalone';
 import { DataService } from 'src/app/services/data';
+import { DatacenterDashboardService } from 'src/app/services/datacenter-dashboard';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { CreateIncidentComponent } from 'src/app/shared/components/modals/create-incident/create-incident.component';
 
 @Component({
@@ -11,12 +13,13 @@ import { CreateIncidentComponent } from 'src/app/shared/components/modals/create
   styleUrls: ['./incidents.page.scss'],
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule, FooterComponent
   ]
 })
 export class IncidentsPage implements OnInit, ViewWillEnter {
   private dataSvc = inject(DataService);
   private utilsSvc = inject(UtilsService);
+  private dashboardSvc = inject(DatacenterDashboardService);
 
   incidents = signal<any[]>([]);
   isLoading = signal<boolean>(false);
@@ -51,14 +54,14 @@ export class IncidentsPage implements OnInit, ViewWillEnter {
   }
 
   async openIncidentModal() {
-    const modal = await this.utilsSvc.presentModal({
+    const resData = await this.utilsSvc.presentModal({
       component: CreateIncidentComponent,
       cssClass: 'custom-incident-modal'
     });
 
-    const { data } = await modal.onWillDismiss();
-    if (data?.success || data?.code === 'ROW_INSERT_OK' || data?.data) {
+    if (resData?.success || resData?.code === 'ROW_INSERT_OK' || resData?.data) {
       this.getIncidents();
+      this.dashboardSvc.refreshMetrics();
     }
   }
 
@@ -88,6 +91,7 @@ export class IncidentsPage implements OnInit, ViewWillEnter {
           position: 'middle'
         });
         this.getIncidents();
+        this.dashboardSvc.refreshMetrics();
       },
       error: (err: any) => {
         console.error('error al cerrar el incidente:', err);

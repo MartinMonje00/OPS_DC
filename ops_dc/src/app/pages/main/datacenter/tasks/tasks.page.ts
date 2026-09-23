@@ -5,7 +5,9 @@ import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline, checkmarkOutline, refreshOutline } from 'ionicons/icons';
 import { DataService } from 'src/app/services/data';
+import { DatacenterDashboardService } from 'src/app/services/datacenter-dashboard';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { CreateTaskComponent } from 'src/app/shared/components/modals/create-task/create-task.component';
 
 @Component({
@@ -14,12 +16,13 @@ import { CreateTaskComponent } from 'src/app/shared/components/modals/create-tas
   styleUrls: ['./tasks.page.scss'],
   standalone: true,
   imports: [
-    IonIcon, CommonModule
+    IonIcon, CommonModule, FooterComponent
   ]
 })
 export class TasksPage implements OnInit, ViewWillEnter {
   private dataSvc = inject(DataService);
   private utilsSvc = inject(UtilsService);
+  private dashboardSvc = inject(DatacenterDashboardService);
 
   tasks = signal<any[]>([]);
   isLoading = signal<boolean>(false);
@@ -68,6 +71,7 @@ export class TasksPage implements OnInit, ViewWillEnter {
 
     if (resData?.success || resData?.code === 'ROW_INSERT_OK' || resData?.data) {
       this.getTasks();
+      this.dashboardSvc.refreshMetrics();
     }
   }
 
@@ -77,9 +81,6 @@ export class TasksPage implements OnInit, ViewWillEnter {
 
     this.dataSvc.updateTaskStatus(id, { action: 'toggle' }).subscribe({
       next: (res: any) => {
-        const newStatus = res?.data?.status;
-        const statusLabel = newStatus === 1 ? 'En Proceso' : 'Abierto';
-
         this.utilsSvc.presentToast({
           message: 'Estado de tarea actualizado',
           duration: 1500,
@@ -126,6 +127,7 @@ export class TasksPage implements OnInit, ViewWillEnter {
           position: 'middle'
         });
         this.getTasks();
+        this.dashboardSvc.refreshMetrics();
       },
       error: (err: any) => {
         console.error('Error al completar la tarea:', err);

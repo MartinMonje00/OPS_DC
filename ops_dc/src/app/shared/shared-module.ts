@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
-import { CustomAppInputComponent } from './components/custom-app-input/custom-app-input.component';
 import { CurrencyModalComponent } from './components/modals/currency-modal/currency-modal.component';
-
-
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [],
   exports: [
     CommonModule,
     HeaderComponent,
-    CustomAppInputComponent,
-    CurrencyModalComponent
+    CurrencyModalComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     HeaderComponent,
-    CustomAppInputComponent,
-    CurrencyModalComponent
+    CurrencyModalComponent,
+    FooterComponent
 ]
 })
 export class SharedModule { }

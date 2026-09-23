@@ -156,6 +156,7 @@ ion-split-pane {
         font-weight: 500;
         transition: var(--background) 0.2s ease;
         cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
 
         ion-icon, .badge-text-cyan {
             width: 22px;

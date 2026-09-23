@@ -1,7 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonIcon } from '@ionic/angular/standalone';
-import { CustomAppInputComponent } from '../../custom-app-input/custom-app-input.component';
+import { IonIcon } from '@ionic/angular/standalone';
 import { UtilsService } from 'src/app/services/utils';
 import { DataService } from 'src/app/services/data';
 import { addIcons } from 'ionicons';
@@ -14,7 +13,7 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./create-log.component.scss'],
   standalone: true,
   imports: [
-    IonContent, IonIcon, ReactiveFormsModule, CustomAppInputComponent
+    IonIcon, ReactiveFormsModule
   ]
 })
 export class CreateLogComponent  implements OnInit {

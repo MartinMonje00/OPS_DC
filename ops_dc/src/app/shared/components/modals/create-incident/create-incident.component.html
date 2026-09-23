@@ -10,35 +10,37 @@
     </div>
 
     <form [formGroup]="form" class="form-body" (ngSubmit)="saveIncident()">
-        <app-custom-app-input
-            [control]="getFormControl('name')"
-            type="text"
-            label="Titulo del Incidente"
-            autocomplete="off">
-        </app-custom-app-input>
-    
-        <app-custom-app-input
-            [control]="getFormControl('type')"
-            type="text"
-            label="Tipo"
-            autocomplete="off">
-        </app-custom-app-input>
+        <div class="custom-input-box">
+            <label class="input-label">Titulo del incidente</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="name" placeholder="Ingrese el titulo del incidente" class="native-input">
+            </div>
+        </div>
 
-        <app-custom-app-input
-            [control]="getFormControl('affected_service')"
-            type="text"
-            label="Servicio afectado"
-            autocomplete="off">
-        </app-custom-app-input>
+        <div class="custom-input-box">
+            <label class="input-label">Tipo</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="type" placeholder="Tipo de incidente" class="native-input">
+            </div>
+        </div>
+
+        <div class="custom-input-box">
+            <label class="input-label">Servicio Afectado</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="affected_service" placeholder="Ingrese el servicio afectado" class="native-input">
+            </div>
+        </div>
 
         <div class="inline-grid">
             <div class="custom-select-box">
-                <select formControlName="severity" class="native-select">
-                    @for (s of severities; track s.value) {
-                        <option [value]="s.value">Severidad {{ s.label }}</option>
-                    }
-                </select>
-                <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+                <div class="select-container">
+                    <select formControlName="severity" class="native-select">
+                        @for (s of severities; track s.value) {
+                            <option [value]="s.value">Severidad {{ s.label }}</option>
+                        }
+                    </select>
+                    <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+                </div>
             </div>
 
             <div class="custom-date-time-box">
@@ -59,12 +61,15 @@
             </div>
         </div>
 
-        <app-custom-app-input
-            [control]="getFormControl('description')"
-            type="text"
-            label="Descripcion breve"
-            autocomplete="off">
-        </app-custom-app-input>
+        <div class="custom-select-box">
+            <label class="select-label">DESCRIPCION DEL INCIDENTE</label>
+            <textarea
+                formControlName="description"
+                class="native-textarea"
+                placeholder="Escribe la descripcion del incidente..."
+                oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'">
+            </textarea>
+        </div>
 
         <div class="modal-footer">
             <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>

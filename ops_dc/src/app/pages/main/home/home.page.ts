@@ -10,6 +10,7 @@ import {
   radioOutline, serverOutline, shieldOutline, statsChartOutline
 } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { SharedModule } from 'src/app/shared/shared-module';
 
 @Component({
@@ -19,7 +20,7 @@ import { SharedModule } from 'src/app/shared/shared-module';
   standalone: true,
   imports: [
     CommonModule, IonContent, IonButton, IonCard, IonIcon,
-    SharedModule, RouterLink
+    SharedModule, RouterLink, FooterComponent
   ]
 })
 export class HomePage {

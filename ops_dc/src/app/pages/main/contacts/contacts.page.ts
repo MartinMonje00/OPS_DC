@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { IonContent, ViewWillEnter } from '@ionic/angular/standalone';
 import { DataService } from 'src/app/services/data';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { CreateContactComponent } from 'src/app/shared/components/modals/create-contact/create-contact.component';
 
@@ -11,7 +12,7 @@ import { CreateContactComponent } from 'src/app/shared/components/modals/create-
   styleUrls: ['./contacts.page.scss'],
   standalone: true,
   imports: [
-    IonContent, HeaderComponent
+    IonContent, HeaderComponent, FooterComponent
   ]
 })
 export class ContactsPage implements OnInit, ViewWillEnter {
@@ -74,15 +75,13 @@ export class ContactsPage implements OnInit, ViewWillEnter {
   }
 
   async openContactModal(contactData?: any) {
-    const modal = await this.utilsSvc.presentModal({
+    const resData = await this.utilsSvc.presentModal({
       component: CreateContactComponent,
       cssClass: 'custom-edit-user-modal',
       componentProps: { contactData }
     });
-    await modal.present();
 
-    const { data } = await modal.onWillDismiss();
-    if (data?.success) {
+    if (resData?.success || resData?.code === 'ROW_INSERT_OK' || resData?.data) {
       this.getContacts();
     }
   }

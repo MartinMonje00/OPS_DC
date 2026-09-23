@@ -5,6 +5,7 @@ import { addIcons } from 'ionicons';
 import { downloadOutline } from 'ionicons/icons';
 import { BackupService, DatabaseBackup } from 'src/app/services/backup';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { SharedModule } from 'src/app/shared/shared-module';
 
 @Component({
@@ -13,7 +14,8 @@ import { SharedModule } from 'src/app/shared/shared-module';
   styleUrls: ['./backup.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, SharedModule, IonContent, IonSpinner, IonIcon
+    CommonModule, SharedModule, IonContent, IonSpinner, IonIcon,
+    FooterComponent
   ]
 })
 export class BackupPage implements OnInit {

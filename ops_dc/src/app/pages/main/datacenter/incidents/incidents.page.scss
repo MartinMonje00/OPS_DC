@@ -1,3 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
 .dc-card-subtitle {
     color: var(--dc-accent-cyan);
     font-size: 0.68rem;

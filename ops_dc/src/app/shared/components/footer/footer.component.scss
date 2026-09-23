@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    user-select: none;
+
+    .dot {
+        color: var(--text-muted);
+        opacity: 0.7;
+    }
+}

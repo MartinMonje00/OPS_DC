@@ -35,9 +35,7 @@ export class HeaderComponent implements OnInit {
   
 
   ngOnInit() {
-    if (this.showIndicators) {
-      this.indicatorsSvc.startAutoRefresh();
-    }
+    this.indicatorsSvc.startAutoRefresh();
   }
 
   constructor() {

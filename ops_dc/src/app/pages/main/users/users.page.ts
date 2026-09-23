@@ -8,6 +8,7 @@ import { UserdataService, User } from 'src/app/services/userdata';
 import { addOutline, checkmarkOutline, closeOutline, pencilOutline } from 'ionicons/icons';
 import { UtilsService } from 'src/app/services/utils';
 import { EditUserComponent } from 'src/app/shared/components/modals/edit-user/edit-user.component';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,7 @@ import { EditUserComponent } from 'src/app/shared/components/modals/edit-user/ed
   standalone: true,
   imports: [
     CommonModule, FormsModule, SharedModule, IonContent, IonIcon,
-    DatePipe
+    DatePipe, FooterComponent
   ]
 })
 export class UsersPage implements OnInit {
@@ -64,13 +65,5 @@ export class UsersPage implements OnInit {
         this.isLoading.set(false);
       }
     });
-  }
-
-  testData() {
-    console.group('--- DEBUG: DATOS DE USUARIOS ---');
-    console.log('Total de usuarios registrados:', this.users().length);
-    console.table(this.users());
-    console.log('Objeto Raw (JSON):', JSON.parse(JSON.stringify(this.users())));
-    console.groupEnd();
   }
 }

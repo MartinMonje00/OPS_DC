@@ -2,7 +2,6 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils';
-import { CustomAppInputComponent } from '../../custom-app-input/custom-app-input.component';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -18,7 +17,7 @@ import { DataService } from 'src/app/services/data';
   styleUrls: ['./create-contact.component.scss'],
   standalone: true,
   imports: [
-    IonIcon, ReactiveFormsModule, CustomAppInputComponent
+    IonIcon, ReactiveFormsModule
   ]
 })
 export class CreateContactComponent  implements OnInit {

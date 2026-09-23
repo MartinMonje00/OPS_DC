@@ -24,24 +24,24 @@
         </div>
       </div>
     }
+    
+    @if (!isEditMode) {
+      <div class="custom-input-box">
+        <label class="input-label">Título</label>
+        <div class="input-wrapper">
+          <input type="text" formControlName="title" placeholder="Ingrese el titulo del registro" class="native-input">
+        </div>
+      </div>
+    }
 
-    <div class="input-stack">
-      @if (!isEditMode) {
-        <app-custom-app-input
-          [control]="getFormControl('title')"
-          type="text"
-          label="Titulo"
-          autocomplete="off">
-        </app-custom-app-input>
-      }
-
-      <app-custom-app-input
-        [control]="getFormControl('description')"
-        type="text"
-        label="Detalle / Observación"
-        autocomplete="off">
-      </app-custom-app-input>
-
+    <div class="custom-select-box">
+      <label class="select-label">DETALLE / OBSERVACIÓN</label>
+      <textarea
+        formControlName="description"
+        class="native-textarea"
+        placeholder="Registrar detalles u observaciones..."
+        oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'">
+      </textarea>
     </div>
 
     @if (!isEditMode) {

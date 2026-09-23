@@ -33,7 +33,7 @@
 
                             <p class="incident-meta">
                                 Inicio {{ item.startedAt | date:'dd-MM-yyyy HH:mm' }}
-                                · {{ item.state?.toLowerCase() === 'cerrado' ? ('Duración ' + (item.duration || 0) + ' min') : 'En curso' }}
+                                · {{ item.state?.toLowerCase() === 'cerrado' ? ('Duración ' + (item.time_pass || 0) + ' min') : 'En curso' }}
                                 · {{ (item.affect === 1 || item.affect === true) ? 'Impacta disponibilidad' : 'Informativo' }}
                             </p>
 
@@ -64,4 +64,8 @@
             }
         </div>
     </div>
+</div>
+
+<div class="page-footer-wrapper">
+    <app-footer></app-footer>
 </div>

@@ -15,6 +15,7 @@ import {
 } from 'ionicons/icons';
 import { filter } from 'rxjs';
 import { AuthService } from 'src/app/services/auth';
+import { IndicatorsService } from 'src/app/services/indicators';
 import { ThemeService } from 'src/app/services/theme';
 import { UserdataService } from 'src/app/services/userdata';
 import { UtilsService } from 'src/app/services/utils';
@@ -32,6 +33,7 @@ import { UtilsService } from 'src/app/services/utils';
 export class MainPage implements OnInit {
   private authSvc = inject(AuthService);
   private utilsSvc = inject(UtilsService);
+  private indicatorsSvc = inject(IndicatorsService);
   private router = inject(Router);
 
   public themeSvc = inject(ThemeService);
@@ -84,6 +86,7 @@ export class MainPage implements OnInit {
 
     try {
       this.authSvc.signOut();
+      this.indicatorsSvc.clearCache();
 
       this.utilsSvc.presentToast({
         message: 'Sesion cerrada correctamente',

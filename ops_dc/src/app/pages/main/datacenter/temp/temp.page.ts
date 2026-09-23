@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, signal, inject, ViewChild, ElementRef,
+  Component, signal, ViewChild, ElementRef,
   AfterViewInit, OnDestroy
 } from '@angular/core';
 import { IonIcon } from '@ionic/angular/standalone';
@@ -8,8 +8,8 @@ import { addIcons } from 'ionicons';
 import {
   addOutline, flashOutline, pulseOutline, thermometerOutline, waterOutline
 } from 'ionicons/icons';
-import { UtilsService } from 'src/app/services/utils';
 import { Chart, registerables } from 'chart.js';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 Chart.register(...registerables);
 
 interface LatestRoomReading {
@@ -27,12 +27,10 @@ interface LatestRoomReading {
   styleUrls: ['./temp.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonIcon
+    CommonModule, IonIcon, FooterComponent
   ]
 })
 export class TempPage implements AfterViewInit, OnDestroy {
-  private utilsSvc = inject(UtilsService);
-
   @ViewChild('varianceCanvas') varianceCanvas!: ElementRef<HTMLCanvasElement>;
   private varianceChart: Chart | null = null;
   private resizeObserver!: ResizeObserver;

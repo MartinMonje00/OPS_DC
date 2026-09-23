@@ -10,6 +10,23 @@ $teal-accent: var(--accent-green);
 $orange-accent: var(--accent-orange);
 $red-accent: var(--accent-red);
 
+/*
+.cards-grid {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+
+    min-height: calc(100vh - 180px);
+    grid-template-columns: 1fr;
+
+    @media (min-width: 901px) and (max-width: 1400px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1401px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+*/
 .module-card {
     background-color: $bg-card;
     border: 1px solid $border-card;
@@ -185,6 +202,7 @@ $red-accent: var(--accent-red);
         }
     }
 }
+//}
 
 .border-purple { border-color: var(--border-accent-purple) }
 .border-cyan   { border-color: var(--border-accent-cyan) }

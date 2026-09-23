@@ -4,7 +4,7 @@
       <ion-icon [name]="isEditMode ? 'create-outline' : 'person-add-outline'" class="header-icon"></ion-icon>
       <h2>{{ isEditMode ? 'Editar Contacto' : 'Nuevo Contacto' }}</h2>
     </div>
-    <button type="button" class="btn close" (click)="closeModal()">
+    <button type="button" class="btn-close" (click)="closeModal()">
       <ion-icon name="close-outline"></ion-icon>
     </button>
   </div>
@@ -12,57 +12,57 @@
   <div class="modal-divider"></div>
 
   <form [formGroup]="form" class="form-body" (ngSubmit)="saveContact()">
-    <div class="input-grid">
-      <app-custom-app-input
-      [control]="getFormControl('name')"
-      type="text"
-      label="Nombre Completo"
-      icon="person-outline"
-      autocomplete="off">
-      </app-custom-app-input>
+    <div class="input-grid-2">
+      <div class="custom-input-box">
+        <label class="input-label">Nombre Completo</label>
+        <div class="input-wrapper">
+          <ion-icon name="person-outline" class="input-icon"></ion-icon>
+          <input type="text" formControlName="name" placeholder="Ingresa el nombre" class="native-input">
+        </div>
+      </div>
 
-      <app-custom-app-input
-      [control]="getFormControl('company')"
-      type="text"
-      label="Empresa"
-      icon="business-outline"
-      autocomplete="off">
-      </app-custom-app-input>
+      <div class="custom-input-box">
+        <label class="input-label">Empresa</label>
+        <div class="input-wrapper">
+          <ion-icon name="business-outline" class="input-icon"></ion-icon>
+          <input type="text" formControlName="company" placeholder="Ingresa la empresa" class="native-input">
+        </div>
+      </div>
 
-      <app-custom-app-input
-      [control]="getFormControl('charge')"
-      type="text"
-      label="Cargo"
-      icon="briefcase-outline"
-      autocomplete="off">
-      </app-custom-app-input>
+      <div class="custom-input-box">
+        <label class="input-label">Cargo</label>
+        <div class="input-wrapper">
+          <ion-icon name="briefcase-outline" class="input-icon"></ion-icon>
+          <input type="text" formControlName="charge" placeholder="Ingresa el cargo" class="native-input">
+        </div>
+      </div>
 
-      <app-custom-app-input
-      [control]="getFormControl('email')"
-      type="text"
-      label="Correo Electrónico"
-      icon="mail-outline"
-      autocomplete="off">
-      </app-custom-app-input>
+      <div class="custom-input-box">
+        <label class="input-label">Correo Electrónico</label>
+        <div class="input-wrapper">
+          <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+          <input type="email" formControlName="email" placeholder="Ingresa el correo" class="native-input">
+        </div>
+      </div>
 
-      <app-custom-app-input
-      [control]="getFormControl('telephone')"
-      type="text"
-      label="Teléfono"
-      icon="call-outline"
-      autocomplete="off">
-      </app-custom-app-input>
-    </div>
-
-    <div class="custom-select-box">
-      <label class="section-label">TIPO DE CONTACTO</label>
-      <div class="select-container">
-        <select formControlName="type" class="native-select">
-          @for (t of contactTypes; track t.value) {
-            <option [value]="t.value">{{ t.label }}</option>
-          }
-        </select>
-        <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+      <div class="custom-input-box">
+        <label class="input-label">Teléfono</label>
+        <div class="input-wrapper">
+          <ion-icon name="call-outline" class="input-icon"></ion-icon>
+          <input type="tel" formControlName="telephone" placeholder="Ingresa el numero de teléfono" class="native-input">
+        </div>
+      </div>
+    
+      <div class="custom-select-box">
+        <label class="section-label">TIPO DE CONTACTO</label>
+        <div class="select-container">
+          <select formControlName="type" class="native-select">
+            @for (t of contactTypes; track t.value) {
+              <option [value]="t.value">{{ t.label }}</option>
+            }
+          </select>
+          <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+        </div>
       </div>
     </div>
 

@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { addOutline, bookOutline, createOutline, lockClosedOutline } from 'ionicons/icons';
 import { DataService } from 'src/app/services/data';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { CreateLogComponent } from 'src/app/shared/components/modals/create-log/create-log.component';
 
 @Component({
@@ -14,7 +15,7 @@ import { CreateLogComponent } from 'src/app/shared/components/modals/create-log/
   styleUrls: ['./logs.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, IonIcon
+    CommonModule, IonIcon, FooterComponent
   ]
 })
 export class LogsPage implements OnInit, ViewWillEnter {
@@ -60,13 +61,13 @@ export class LogsPage implements OnInit, ViewWillEnter {
   }
 
   async openLogsModal(log?: any) {
-    const res = await this.utilsSvc.presentModal({
+    const resData = await this.utilsSvc.presentModal({
       component: CreateLogComponent,
       componentProps: { logData: log },
       cssClass: 'custom-logbook-modal'
     });
 
-    if (res?.success || res?.data) {
+    if (resData?.success || resData?.code === 'ROW_INSERT_OK' || resData?.data) {
       this.getLogs();
     }
   }

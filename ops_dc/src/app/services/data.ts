@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UtilsService } from './utils';
@@ -66,5 +66,13 @@ export class DataService {
 
   getDashboardData(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/Dashboard`, { headers: this.utilsSvc.getHeaders() });
+  }
+
+  getIncidentsResume(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/resume/incidents`, { headers: this.utilsSvc.getHeaders() });
+  }
+
+  getTasksResume(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/resume/tasks`, { headers: this.utilsSvc.getHeaders() });
   }
 }

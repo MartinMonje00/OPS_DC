@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ViewWillEnter } from '@ionic/angular';
 import { DataService } from 'src/app/services/data';
 import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
 export interface LatestRoomReading {
   id: string;
@@ -20,7 +21,7 @@ export interface LatestRoomReading {
   styleUrls: ['./resume.page.scss'],
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule, FooterComponent
   ]
 })
 export class ResumePage implements OnInit, ViewWillEnter {
@@ -52,13 +53,14 @@ export class ResumePage implements OnInit, ViewWillEnter {
 
   loadIncidents() {
     this.loadingIncidents.set(true);
-    this.dataSvc.getIncidents().subscribe({
+    this.dataSvc.getIncidentsResume().subscribe({
       next: (res: any) => {
-        console.log('repuesta en crudo:', res);
-        const list = Array.isArray(res?.data) ? res.data : [];
-        this.alerts.set(list);
-        console.log('respuesta en arreglo:');
-        console.table(this.alerts());
+        if (res && res.data) {
+          const list = Array.isArray(res.data) ? res.data : [res.data];
+          this.alerts.set(list);
+        } else {
+          this.alerts.set([]);
+        }
         this.loadingIncidents.set(false);
       },
       error: (err: any) => {
@@ -76,13 +78,14 @@ export class ResumePage implements OnInit, ViewWillEnter {
 
   loadTasks() {
     this.loadingTasks.set(true);
-    this.dataSvc.getTasks().subscribe({
+    this.dataSvc.getTasksResume().subscribe({
       next: (res: any) => {
-        console.log('respuesta en crudo:', res);
-        const list = Array.isArray(res?.data) ? res.data : [];
-        this.tasks.set(list);
-        console.log('Respuesta en arreglo:');
-        console.table(this.tasks());
+        if (res && res.data) {
+          const list = Array.isArray(res.data) ? res.data : [res.data];
+          this.tasks.set(list);
+        } else {
+          this.tasks.set([]);
+        }
         this.loadingTasks.set(false);
       },
       error: (err: any) => {
@@ -100,5 +103,12 @@ export class ResumePage implements OnInit, ViewWillEnter {
 
   navigateTo(path: string) {
     this.router.navigate([path]);
+  }
+
+  testData() {
+    this.loadIncidents();
+    this.loadTasks();
+    console.table(this.alerts());
+    console.table(this.tasks());
   }
 }
