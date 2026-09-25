@@ -46,8 +46,6 @@ export class AuthPage {
         password: password!
       });
 
-      console.log(res.code)
-
       this.utilsSvc.routerLink('/main/home')
 
       this.form.reset();

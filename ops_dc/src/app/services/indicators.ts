@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, OnDestroy, signal } from '@angular/core';
-import { map, Observable, of, Subscription, timer } from 'rxjs';
+import { Observable, of, Subscription, timer } from 'rxjs';
 import { UtilsService } from './utils';
 
 export interface WeatherData {
