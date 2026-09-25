@@ -1,0 +1,87 @@
+<div class="dc-card-grid">
+    <div class="dc-card grid-area-7">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">INFRAESTRUCTURA DC</span>
+                <h2 class="dc-card-title">Última Lectura</h2>
+            </div>
+        </div>
+        <div class="dc-card-body">
+            <div class="room-readings-list">
+                @for (room of latestReadings(); track room.id) {
+                <div class="room-row" [ngClass]="room.status">
+                    <div class="room-info">
+                        <h3 class="room-name">{{ room.name }}</h3>
+                        <p class="room-meta">HR: {{ room.humidity | number:'1.1-1' }}% · {{ room.timestamp }}</p>
+                    </div>
+                    <div class="room-temp-badge">
+                        <span class="temp-num">{{ room.temp | number:'1.1-1' }} °C</span>
+                        <span class="status-indicator"></span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="dc-card grid-area-8">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">TELEMETRÍA 24H</span>
+                <h2 class="dc-card-title">Varianza Térmica</h2>
+            </div>
+        </div>
+        <div class="dc-card-body">
+            <div class="chart-canvas-wrapper">
+                <canvas #varianceCanvas></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="dc-card grid-area-9">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">MÉTRICAS CONSOLIDADAS</span>
+                <h2 class="dc-card-title">Promedios Globales</h2>
+            </div>
+        </div>
+        <div class="dc-card-body">
+            <div class="bars-chart-container">
+                <div class="bar-column">
+                    <div class="bar-value-label">{{ barMetrics().avgTemp }} °C</div>
+                    <div class="bar-track">
+                        <div class="bar-fill cyan" [style.height.%]="(barMetrics().avgTemp / 40) * 100"></div>
+                    </div>
+                    <div class="bar-footer">
+                        <ion-icon name="thermometer-outline"></ion-icon>
+                        <span>Temp.</span>
+                    </div>
+                </div>
+                <div class="bar-column">
+                    <div class="bar-value-label">{{ barMetrics().avgHumidity }} %</div>
+                    <div class="bar-track">
+                        <div class="bar-fill emerald" [style.height.%]="barMetrics().avgHumidity"></div>
+                    </div>
+                    <div class="bar-footer">
+                        <ion-icon name="water-outline"></ion-icon>
+                        <span>Humedad</span>
+                    </div>
+                </div>
+                <div class="bar-column">
+                    <div class="bar-value-label">{{ barMetrics().hvacLoad }} %</div>
+                    <div class="bar-track">
+                        <div class="bar-fill amber" [style.height.%]="barMetrics().hvacLoad"></div>
+                    </div>
+                    <div class="bar-footer">
+                        <ion-icon name="flash-outline"></ion-icon>
+                        <span>HVAC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-footer-wrapper">
+    <app-footer></app-footer>
+</div>

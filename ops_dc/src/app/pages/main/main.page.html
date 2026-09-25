@@ -1,0 +1,169 @@
+<ion-split-pane content-id="main-content" class="authenticated-layout">
+  <ion-menu contentId="main-content" type="push" class="custom-sidebar">
+    <ion-content class="sidebar-content">
+      <div class="sidebar-header">
+        <div class="logo-box">
+          <img src="../../../assets/icon/logo.png" alt="Logo de S&A Chile" class="brand-logo">
+        </div>
+        <span class="logo-title">S&A Business Hub</span>
+      </div>
+
+      <div class="user-card" [style.border-left-color]="theme().accentColor">
+        <div class="user-avatar" [style.background]="theme().avatarBgColor">{{ initials() }}</div>
+        <div class="user-info">
+          <span class="user-name">{{ user()?.name }}</span>
+          <span class="user-role" [style.color]="theme().accentColor">{{ theme().roleLabel }}</span>
+        </div>
+      </div>
+
+      <div class="theme-toggle-btn" (click)="themeSvc.toggleTheme()" role="button">
+        <ion-icon [name]="themeSvc.isDarkMode() ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+        <span>{{ themeSvc.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}</span>
+      </div>
+
+      <nav class="sidebar-nav">
+
+        <div class="nav-category">PRINCIPAL</div>
+
+        <a class="nav-item" routerLink="/main/home" routerDirection="root" routerLinkActive="active">
+          <ion-icon name="square" class="icon-cyan-small"></ion-icon>
+          <span class="nav-text">Inicio / Panel</span>
+        </a>
+
+        <div class="nav-category">PERFILES</div>
+
+        <!--<a class="nav-item" routerLink="">
+          <ion-icon name="stats-chart-outline" class="icon-indigo"></ion-icon>
+          <span class="nav-text">Gerencia</span>
+        </a>
+        
+        <a class="nav-item" routerLink="">
+          <ion-icon name="briefcase-outline" class="icon-pink"></ion-icon>
+          <span class="nav-text">Administración</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="cog-outline" class="icon-purple"></ion-icon>
+          <span class="nav-text">Operaciones</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="grid-outline" class="icon-cyan"></ion-icon>
+          <span class="nav-text">Gestión</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="cart-outline" class="icon-gold"></ion-icon>
+          <span class="nav-text">Ventas</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="shapes-outline" class="icon-orange"></ion-icon>
+          <span class="nav-text">Arquitectura</span>
+        </a> -->
+
+        <div class="sidebar-dropdown-group" [class.is-expanded]="isDatacenterExpanded()">
+          <button type="button" class="dropdown-trigger-btn" (click)="toggleDatacenterMenu()">
+            <div class="trigger-left">
+              <ion-icon name="server-outline" class="menu-icon"></ion-icon>
+              <span class="menu-label">Datacenter</span>
+            </div>
+            <ion-icon name="chevron-down-outline" class="chevron-icon"></ion-icon>
+          </button>
+          <div class="dropdown-content-wrapper">
+            <div class="dropdown-content-inner">
+              <a routerLink="/main/datacenter/resume" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Resumen</span>
+            </a>
+              <a routerLink="/main/datacenter/tasks" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Tareas</span>
+            </a>
+              <a routerLink="/main/datacenter/incidents" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span
+              ><span>Incidentes</span>
+            </a>
+              <a routerLink="/main/datacenter/temp" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Temperatura</span>
+            </a>
+              <a routerLink="/main/datacenter/logs" routerLinkActive="active-subitem" class="sub-item-link">
+              <span class="sub-item-dot"></span>
+              <span>Bitacora</span>
+            </a>
+            </div>
+          </div>
+        </div>
+
+        <!--<a class="nav-item" routerLink="">
+          <ion-icon name="shield-checkmark-outline" class="icon-amber"></ion-icon>
+          <span class="nav-text">Seguridad</span>
+        </a> -->
+
+        <div class="nav-category">GESTIÓN</div>
+
+        <!--
+        <a class="nav-item" routerLink="">
+          <span class="badge-text-cyan">CL</span>
+          <span class="nav-text">ChileCompra</span>
+        </a>
+        -->
+
+        <a class="nav-item" routerLink="/main/contacts" routerLinkActive="active">
+          <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">Contactos</span>
+        </a>
+
+        <!--
+        <a class="nav-item" routerLink="">
+          <ion-icon name="triangle-outline" class="icon-cyan"></ion-icon>
+          <span class="nav-text">Licitaciones</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="square-outline" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">Cotizador</span>
+        </a>
+
+        <a class="nav-item" routerLink="">
+          <ion-icon name="square" class="icon-cyan icon-diamond"></ion-icon>
+          <span class="nav-text">CMDB</span>
+        </a>
+        -->
+
+        @if (isAdmin()) {
+          <a class="nav-item" routerLink="/main/backup" routerLinkActive="active">
+            <ion-icon name="download-outline" class="icon-cyan"></ion-icon>
+            <span class="nav-text">Respaldos</span>
+          </a>
+        }
+
+        <a class="nav-item" href="https://syachile.cl/recursos/" target="_blank" rel="noopener noreferrer">
+          <ion-icon name="flash-outline" class="icon-orange"></ion-icon>
+          <span class="nav-text">Recursos y Salas</span>
+        </a>
+
+        @if (isAdmin()) {
+          <div class="nav-category">ADMINISTRACIÓN</div>
+
+          <a class="nav-item" routerLink="/main/users" routerLinkActive="active">
+            <ion-icon name="people-outline" class="icon-purple"></ion-icon>
+            <span class="nav-text">Usuarios</span>
+          </a>
+        }
+
+        <div class="logout-wrapper">
+          <a class="nav-item logout-item" (click)="signOut()" role="button">
+            <ion-icon name="log-out-outline" class="icon-red"></ion-icon>
+            <span class="nav-text text-red">Cerrar Sesión</span>
+          </a>
+        </div>
+      </nav>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet [animated]="false"></ion-router-outlet>
+  </div>
+</ion-split-pane>

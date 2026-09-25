@@ -1,0 +1,52 @@
+<div class="modal-card">
+  <div class="modal-header">
+    <div class="header-title">
+      <h2>Crear nueva tarea</h2>
+      <p class="subtitle">Registrar una tarea operacional</p>
+    </div>
+    <button type="button" class="btn-close" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="form" class="form-body" (ngSubmit)="saveTask()">
+    <div class="custom-input-box">
+      <label class="input-label">Nueva tarea operacional</label>
+      <div class="input-wrapper">
+        <input type="text" formControlName="name" placeholder="Nombre de la tarea" class="native-input">
+      </div>
+    </div>
+
+    <div class="custom-select-box">
+      <label class="select-label">DESCRIPCIÓN BREVE</label>
+      <textarea 
+        formControlName="description"
+        class="native-textarea"
+        placeholder="Escribe una breve descripcion de la tarea"
+        oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'">
+      </textarea>
+    </div>
+
+    <div class="inline-grid">
+      <div class="custom-select-box">
+        <div class="select-container">
+          <select formControlName="priority" class="native-select">
+            @for (p of priorities; track p.value) {
+              <option [value]="p.value">{{ p.label }}</option>
+            }
+          </select>
+          <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+        </div>
+      </div>
+
+      <div class="custom-date-box">
+        <input type="date" formControlName="date" class="native-date" />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="form.invalid">Guardar</button>
+    </div>
+  </form>
+</div>

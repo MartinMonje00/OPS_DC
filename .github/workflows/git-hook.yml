@@ -1,0 +1,45 @@
+name: Sincronizacion Bidireccional Automatizada
+
+on:
+    push:
+        branches:
+            [ "Feature", "HotFix", "Feature/*" ]
+
+jobs:
+    sync-branches:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Descarga del codigo del repositorio del proyecto
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+
+            - name: Configuracion de identidad Git para la operacion
+              run: |
+                git config --global user.name "Github Actions Bot"
+                git config --global user.email "actions@github.com"
+
+            - name: Merge de las ramas para correcta sincronizacion
+              run: |
+                CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+                echo "Rama de activacion del push: $CURRENT_BRANCH"
+
+                if [[ "$CURRENT_BRANCH" == Feature/* || "$CURRENT_BRANCH" == Feature ]]; then
+                    TARGET_BRANCH="HotFix"
+
+                    echo "Rama objetivo detectada: Sincronizacion hacia $TARGET_BRANCH"
+
+                    git checkout -B $TARGET_BRANCH origin/$TARGET_BRANCH
+                    git merge origin/$CURRENT_BRANCH --no-edit
+                    git push origin $TARGET_BRANCH
+                elif [[ "$CURRENT_BRANCH" == HotFix ]]; then
+                    TARGET_BRANCH="Feature"
+
+                    echo "Rama objetivo detectada: Sincronizacion hacia $TARGET_BRANCH"
+
+                    git checkout -B $TARGET_BRANCH origin/$TARGET_BRANCH
+                    git merge origin/$CURRENT_BRANCH --no-edit
+                    git push origin $TARGET_BRANCH
+                fi
+
+#version v1.1

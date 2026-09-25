@@ -1,0 +1,80 @@
+<div class="modal-card">
+  <div class="modal-header">
+    <div class="header-title">
+      <h2>{{ isEditMode ? 'Editar Bitácora' : 'Nueva entrada de Bitácora' }}</h2>
+      <p class="subtitle">
+        {{ isEditMode ? 'Actualiza el estado u observación de la bitácora.' : 'Registra eventos u observaciones.' }}
+      </p>
+    </div>
+    <button type="button" class="btn-close" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="form" class="form-body" (ngSubmit)="saveLog()">
+    @if (isEditMode) {
+      <div class="read-only-box">
+        <div class="summary-item">
+          <span class="label">TÍTULO</span>
+          <span class="value">{{ logData?.title || '-' }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">CATEGORÍA</span>
+          <span class="value">{{ logData?.category || '-' }}</span>
+        </div>
+      </div>
+    }
+    
+    @if (!isEditMode) {
+      <div class="custom-input-box">
+        <label class="input-label">Título</label>
+        <div class="input-wrapper">
+          <input type="text" formControlName="title" placeholder="Ingrese el titulo del registro" class="native-input">
+        </div>
+      </div>
+    }
+
+    <div class="custom-select-box">
+      <label class="select-label">DETALLE / OBSERVACIÓN</label>
+      <textarea
+        formControlName="description"
+        class="native-textarea"
+        placeholder="Registrar detalles u observaciones..."
+        oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'">
+      </textarea>
+    </div>
+
+    @if (!isEditMode) {
+      <div class="custom-select-box">
+        <label class="select-label"> CATEGORÍA</label>
+        <div class="select-container">
+          <select formControlName="category" class="native-select">
+            @for (c of logCategories; track c.value) {
+              <option [value]="c.value">{{ c.label }}</option>
+            }
+          </select>
+          <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+        </div>
+      </div>
+    }
+
+    <div class="custom-select-box">
+      <label class="select-label">ESTADO</label>
+      <div class="select-container">
+        <select formControlName="state" class="native-select">
+          @for (s of logStates; track s.value) {
+            <option [value]="s.value">{{ s.label }}</option>
+          }
+        </select>
+        <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="form.invalid">
+        {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</div>

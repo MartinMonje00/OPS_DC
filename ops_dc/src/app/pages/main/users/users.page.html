@@ -1,0 +1,80 @@
+<app-header title="Bienvenido al Hub Operacional"></app-header>
+
+<ion-content class="ion-padding full-width-content">
+  <div class="page-top-bar">
+    <h1 class="page-title">Administración de usuarios</h1>
+  </div>
+
+  <div class="dc-card">
+    <div class="dc-card-header">
+      <div class="header-title">
+        <span class="dc-card-subtitle">GESTIÓN</span>
+        <h2 class="dc-card-title">Usuarios Activos</h2>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>NOMBRE</th>
+            <th>USUARIO</th>
+            <th>EMAIL</th>
+            <th>ROL</th>
+            <th>ESTADO</th>
+            <th>ÚLTIMO ACCESO</th>
+            <th class="text-right">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users(); track user.id || user.username) {
+            <tr>
+              <td class="font-bold text-white">{{ user.name }}</td>
+              <td class="text-muted">{{ user.username }}</td>
+              <td class="text-muted">{{ user.email }}</td>
+
+              <td>
+                <span class="badge-role"
+                [style.color]="userdataSvc.getCardTheme(user.role).accentColor"
+                [style.background-color]="userdataSvc.getCardTheme(user.role).avatarBgColor"
+                >
+                  {{ userdataSvc.getCardTheme(user.role).roleLabel }}
+                </span>
+              </td>
+
+              <td>
+                <span 
+                  class="badge-status"
+                  [class.status-active]="user.isActive"
+                  [class.status-inactive]="!user.isActive"
+                >
+                  <ion-icon [name]="user.isActive ? 'checkmark-outline' : 'close-outline'"></ion-icon>
+                  {{ user.isActive ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+
+              <td class="text-muted">{{ user.lastAccess ? (user.lastAccess | date:'dd-MM-yyyy HH:mm') : 'Sin registro' }}</td>
+
+              <td class="text-right">
+                <button class="btn-action-edit" (click)="openEditModal(user)">
+                  <ion-icon name="pencil-outline"></ion-icon>
+                  Editar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="text-center text-muted" style="padding: 1.5rem;">
+                No hay usuarios activos registrados
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="page-footer-wrapper">
+    <app-footer></app-footer>
+  </div>
+</ion-content>

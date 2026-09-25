@@ -1,0 +1,93 @@
+<app-header title="Bienvenido/a al Hub de Gestión Operacional"></app-header>
+
+<ion-content class="ion-padding full-width-content">
+    <div class="dc-card">
+        <div class="dc-card-header">
+            <div class="header-title">
+                <span class="dc-card-subtitle">DIRECTORIO OPERACIONAL</span>
+                <h2 class="dc-card-title">Contactos</h2>
+            </div>
+            <button type="button" class="dc-btn-primary" (click)="openContactModal()">+ Contacto</button>
+        </div>
+
+        @if (visibleCategories().length > 0) {
+            <div class="category-tabs">
+                @for (tab of visibleCategories(); track tab.key) {
+                    <button
+                        type="button"
+                        class="tab-btn"
+                        [class.active]="selectedCategory() === tab.key"
+                        (click)="selectedCategory.set(tab.key)">
+                        {{ tab.label }}
+                        <span class="tab-badge" [class.active]="selectedCategory() === tab.key">
+                            {{ countByCategory(tab.key) }}
+                        </span>
+                    </button>
+                }
+            </div>
+        }
+
+        <div class="dc-card-body">
+            <div class="table-container">
+                <table class="dc-table">
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            <th>EMPRESA</th>
+                            <th>CARGO</th>
+                            <th>CORREO</th>
+                            <th>TELÉFONO</th>
+                            <th class="col-actions">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (isLoading()) {
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                Cargando contactos...
+                            </td>
+                        </tr>
+                        } @else {
+                        @for (item of filteredContacts(); track item.id) {
+                        <tr>
+                            <td class="col-name"><span class="font-bold">{{ item.name }}</span></td>
+                            <td>{{ item.company || '-' }}</td>
+                            <td>{{ item.charge || '-' }}</td>
+                            <td>
+                                @if (item.email) {
+                                <a [href]="'mailto:' + item.email" class="table-link">{{ item.email }}</a>
+                                } @else {
+                                -
+                                }
+                            </td>
+                            <td>{{ item.telephone || '-' }}</td>
+                            <td class="col-actions">
+                                <div class="actions-group">
+                                    <button type="button" class="btn-action-pill edit" (click)="openContactModal(item)">
+                                        Editar
+                                    </button>
+                                    <button type="button" class="btn-action-pill delete"
+                                        (click)="deleteContact(item.id)">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                Sin contactos
+                            </td>
+                        </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer-wrapper">
+        <app-footer></app-footer>
+    </div>
+</ion-content>

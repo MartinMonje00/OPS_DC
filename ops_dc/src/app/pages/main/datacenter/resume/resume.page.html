@@ -1,0 +1,128 @@
+<div class="dc-card-grid">
+    <div class="dc-card grid-area-1">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">ALERTAS</span>
+                <h2 class="dc-card-title">Foco critico</h2>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="btn-detail" (click)="navigateTo('/main/datacenter/incidents')">
+                    Ver detalle
+                </button>
+            </div>
+        </div>
+
+        <div class="dc-card-body">
+            @if (loadingIncidents()) {
+                <div class="state-message">Cargando incidentees...</div>
+            } @else if (alerts().length === 0) {
+                <div class="empty-box">
+                    <span>Sin incidentes abiertos.</span>
+                </div>
+            } @else {
+                <div class="rows-list">
+                    @for (alert of alerts(); track alert.id || alert.incident_id || $index) {
+                        <div class="data-row alert-row">
+                            <div class="row-info">
+                                <h3 class="row-title">{{ alert.name }}</h3>
+                                <span class="row-sub">{{ alert.affected_service || 'Servicio no especificado' }}</span>
+                                <span class="row-date">{{ (alert.createdAt) | date:'dd-MM-yyyy HH:mm' }}</span>
+                            </div>
+                            <div class="row-side">
+                                <span class="badge priority" [ngClass]="(alert.severity).toLowerCase()">
+                                    {{ (alert.severity) | titlecase }}
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="dc-card grid-area-2">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">OPERACIÓN</span>
+                <h2 class="dc-card-title">Tareas prioritarias</h2>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="btn-detail" (click)="navigateTo('/main/datacenter/tasks')">
+                    Ver detalle
+                </button>
+            </div>
+        </div>
+
+        <div class="dc-card-body">
+            @if (loadingTasks()) {
+                <div class="state-message">Cargando tareas...</div>
+            } @else if (tasks().length === 0) {
+                <div class="empty-box">
+                    <span>Sin tareas prioritarias.</span>
+                </div>
+            } @else {
+                <div class="rows-list">
+                    @for (task of tasks(); track task.id || task.task_id || $index) {
+                        <div class="data-row">
+                            <div class="row-info">
+                                <h3 class="row-title">{{ task.name }}</h3>
+                                @if (task.description) {
+                                    <p class="row-description">{{ task.description }}</p>
+                                }
+                            </div>
+
+                            <div class="row-side">
+                                <span class="badge state" [ngClass]="{
+                                    'en-curso': task.status == 1,
+                                    'pendiente': task.status == 2
+                                }">
+                                    {{ task.status == 1 ? 'En progreso' : (task.status == 2 ? 'Pendiente' : 'Desconocido') }}
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="dc-card grid-area-3">
+        <div class="dc-card-header">
+            <div class="dc-header-title">
+                <span class="dc-card-subtitle">AMBIENTE</span>
+                <h2 class="dc-card-title">Ultimas temperaturas</h2>
+            </div>
+            <div class="header-actions">
+                <button type="button" class="btn-detail" (click)="testData()">
+                    Ver detalle
+                </button>
+            </div>
+        </div>
+
+        <div class="dc-card-body">
+            @if (latestReadings().length === 0) {
+                <div class="empty-box">
+                    <span>Sin lecturas registradas</span>
+                </div>
+            } @else {
+                <div class="rows-list">
+                    @for (reading of latestReadings(); track reading.id || $index) {
+                        <div class="data-row temp-row">
+                            <div class="row-info">
+                                <h3 class="row-title">{{ reading.name }}</h3>
+                                <span class="row-date">Hoy {{ reading.timestamp }}</span>
+                            </div>
+                            <div class="row-side">
+                                <span class="temp-value" [ngClass]="reading.status">{{ reading.temp }}°C</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="page-footer-wrapper">
+    <app-footer></app-footer>
+</div>

@@ -1,0 +1,247 @@
+<app-header title="Bienvenido al Hub de Gestión Operacional"></app-header>
+
+<ion-content class="ion-padding">
+  <div class="cards-grid">
+    <!--
+    <!- Bloques de codigo - Algunos de estos bloques pueden estar desabilitados por falta de funciones ->
+    <!- GESTION ->
+
+    <ion-card class="module-card card-purple border-purple">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="grid-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Gestión</h3>
+          <p class="card-subtitle">Control y Seguimiento de Procesos y Proyectos.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Indicadores de gestión</li>
+          <li>• Proyectos y tareas</li>
+          <li>• Cumplimiento de objetivos</li>
+          <li>• Mejora continua</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!- VENTAS (Temporalmente Deshabilitado) ->
+
+    <ion-card class="module-card card-teal border-green">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="cart-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Ventas</h3>
+          <p class="card-subtitle">Gestión comercial y relación con clientes.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Oportunidades de venta</li>
+          <li>• Pipeline comercial</li>
+          <li>• Clientes y contactos</li>
+          <li>• Cotizaciones y pedidos</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+    -->
+  
+    <!-- DATACENTER -->
+
+    <ion-card class="module-card card-cyan border-cyan">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="server-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Datacenter</h3>
+          <p class="card-subtitle">Monitoreo y gestión de infraestructura tecnológica.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Servidores y recursos</li>
+          <li>• Rendimiento y disponibilidad</li>
+          <li>• Backups y seguridad</li>
+          <li>• Alertas y eventos</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" routerLink="/main/datacenter">
+        <span class="btn-text">Ingresar al dashboard</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+    
+    <!--
+    <!- ADMINISTRACION ->
+
+    <ion-card class="module-card card-cyan border-cyan">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Administración</h3>
+          <p class="card-subtitle">Administración financiera y de recursos.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Contabilidad y finanzas</li>
+          <li>• Presupuesto y costos</li>
+          <li>• Activos y proveedores</li>
+          <li>• Facturación y pagos</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!- ARQUITECTURA ->
+
+    <ion-card class="module-card card-orange border-orange">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="cube-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Arquitectura</h3>
+          <p class="card-subtitle">Diseño, estándares y documentacion técnica.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Arquitectura empresarial</li>
+          <li>• Modelos y diagramas</li>
+          <li>• Estándares y lineamientos</li>
+          <li>• Repositorio de documentos</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!- OPERACIONES ->
+
+    <ion-card class="module-card card-cyan border-cyan">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="radio-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Operaciones</h3>
+          <p class="card-subtitle">Operación diaria de servidores y procesos ctríticos.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Monitoreo de servicios</li>
+          <li>• Incidentes y problemas</li>
+          <li>• Cambios y despliegues</li>
+          <li>• Niveles de servicio (SLA)</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!- GERENCIA GENERAL ->
+
+    <ion-card class="module-card card-purple border-purple">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="stats-chart-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Gerencia General</h3>
+          <p class="card-subtitle">Visión estratégica y toma de decisiones.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• KPIs estratégicos</li>
+          <li>• Resumen ejecutivo</li>
+          <li>• Análisis y tendencias</li>
+          <li>• Reportes gerenciales</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+    <!- SEGURIDAD ->
+
+    <ion-card class="module-card card-red border-red">
+      <div class="card-header-layout">
+        <div class="icon-container">
+          <ion-icon name="shield-outline"></ion-icon>
+        </div>
+
+        <div class="title-container">
+          <h3 class="card-title">Seguridad</h3>
+          <p class="card-subtitle">Gestión de accesos, cumplimiento y seguridad de la información.</p>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ul class="feature-list">
+          <li>• Control de accesos</li>
+          <li>• Gestión de incidentes de seguridad</li>
+          <li>• Cumplimiento ISO 27001</li>
+          <li>• Auditoría y registros</li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="clear" class="action-btn" [disabled]="true">
+        <span class="btn-text">Dashboard proximamente</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-card>
+    -->
+
+  </div>
+
+  <div class="page-footer-wrapper">
+    <app-footer></app-footer>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+<div class="modal-card">
+    <div class="modal-header">
+        <div class="header-title">
+            <h2>Reportar Incidente</h2>
+            <p class="subtitle">Registra una anomalía u operativa crítica en el sistema.</p>
+        </div>
+        <button type="button" class="btn-close" (click)="closeModal()">
+            <ion-icon name="close-outline"></ion-icon>
+        </button>
+    </div>
+
+    <form [formGroup]="form" class="form-body" (ngSubmit)="saveIncident()">
+        <div class="custom-input-box">
+            <label class="input-label">Titulo del incidente</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="name" placeholder="Ingrese el titulo del incidente" class="native-input">
+            </div>
+        </div>
+
+        <div class="custom-input-box">
+            <label class="input-label">Tipo</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="type" placeholder="Tipo de incidente" class="native-input">
+            </div>
+        </div>
+
+        <div class="custom-input-box">
+            <label class="input-label">Servicio Afectado</label>
+            <div class="input-wrapper">
+                <input type="text" formControlName="affected_service" placeholder="Ingrese el servicio afectado" class="native-input">
+            </div>
+        </div>
+
+        <div class="inline-grid">
+            <div class="custom-select-box">
+                <div class="select-container">
+                    <select formControlName="severity" class="native-select">
+                        @for (s of severities; track s.value) {
+                            <option [value]="s.value">Severidad {{ s.label }}</option>
+                        }
+                    </select>
+                    <ion-icon name="chevron-down-outline" class="select-arrow"></ion-icon>
+                </div>
+            </div>
+
+            <div class="custom-date-time-box">
+                <input type="datetime-local" formControlName="startedAt" class="native-datetime" />
+            </div>
+        </div>
+
+        <div class="inline-grid">
+            <div class="custom-datetime-box">
+                <input type="datetime-local" formControlName="endedAt" class="native-datetime" />
+            </div>
+
+            <div class="checkbox-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" formControlName="affect" class="native-checkbox" />
+                    <span>Afecta disponibilidad</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="custom-select-box">
+            <label class="select-label">DESCRIPCION DEL INCIDENTE</label>
+            <textarea
+                formControlName="description"
+                class="native-textarea"
+                placeholder="Escribe la descripcion del incidente..."
+                oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'">
+            </textarea>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+            <button type="submit" class="btn-submit" [disabled]="form.invalid">
+                Registrar incidente
+            </button>
+        </div>
+    </form>
+</div>

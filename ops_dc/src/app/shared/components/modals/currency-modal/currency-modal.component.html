@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h2>Historial {{ indicatorType === 'uf' ? 'UF' : 'Dólar' }}</h2>
+  <button class="close-btn" (click)="dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </button>
+</div>
+
+<div class="modal-body">
+  @if (isLoading) {
+    <div class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  } @else {
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>FECHA</th>
+          <th>VALOR</th>
+          <th>VARIACIÓN</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of historyList; track item.date) {
+          <tr>
+            <td class="date-col">{{ item.date }}</td>
+            <td class="value-col">{{ item.value.toFixed(2) }}</td>
+            <td class="variation-col">
+              @if (item.variation === '---') {
+                <span class="badge badge-neutral">---</span>
+              } @else {
+                <span class="badge" [class.badge-positive]="item.isPositive" [class.badge-negative]="!item.isPositive">
+                  {{ item.variation }}
+                </span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

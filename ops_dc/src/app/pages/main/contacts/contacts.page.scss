@@ -1,0 +1,170 @@
+.dc-btn-primary {
+    background: rgba(0, 229, 255, 0.01);
+    color: var(--dc-accent-cyan);
+    border: 1px solid var(--border-accent-cyan);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: var(--dc-accent-cyan);
+        color: var(--text-primary);
+    }
+}
+
+.category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+
+    .tab-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        padding: 0.5rem 0.85rem;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+
+        .tab-badge {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        &.active {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--dc-accent-cyan);
+
+            .tab-badge {
+                background: var(--dc-accent-cyan);
+                color: #000;
+            }
+        }
+    }
+}
+
+.dc-card-body {
+    padding: 1rem;
+    .table-container {
+        max-height: calc(100vh - 280px);
+        overflow-y: auto;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+        }
+    }
+}
+
+.dc-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    thead {
+        position: sticky;
+        top: 0;
+        background: var(--bg-card-header);
+        z-index: 2;
+
+        th {
+            padding: 0.85rem 1rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: background 0.15s ease;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            td {
+                padding: 0.85rem 1rem;
+                font-size: 0.875rem;
+                color: var(--text-primary);
+
+                &.col-name .font-bold {
+                    font-weight: 600;
+                }
+
+                .table-link {
+                    color: var(--dc-accent-cyan);
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &.empty-state {
+                    text-align: center;
+                    color: var(--text-secondary);
+                    padding: 2.5rem;
+                }
+            }
+        }
+    }
+
+    .col-actions {
+        text-align: right;
+
+        .actions-group {
+            display: inline-flex;
+            gap: 0.5rem;
+
+            .btn-action-pill {
+                padding: 0.25rem 0.65rem;
+                border-radius: 4px;
+                font-size: 0.78rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &.edit {
+                    background: var(--btn-action-bg);
+                    color: var(--btn-action-text);
+                    border-color: var(--btn-action-border);
+
+                    &:hover {
+                        background: var(--btn-action-hover-bg);
+                    }
+                }
+
+                &.delete {
+                    background: var(--badge-danger-bg);
+                    color: var(--badge-danger-text);
+                    border-color: var(--badge-danger-border);
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        opacity: 0.85;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border custom-header">
+  <ion-toolbar class="transparent-toolbar">
+
+    <ion-buttons slot="start">
+      <ion-menu-button class="menu-btn"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="header-title">
+      <strong>{{ title }}</strong>
+    </ion-title>
+
+    @if (showIndicators) {
+      <div slot="end" class="header-widgets ion-hide-down-md">
+        <!--<div class="widget-item bell-widget">
+          <ion-icon name="notifications" class="bell-icon"></ion-icon>
+        </div>-->
+        <ion-button (click)="openCurrencyModal('uf')" fill="clear" class="widget-item data-widget custom-ion-btn" title="Ver historial UF">
+          <div class="btn-content">
+            <span class="label">UF</span>
+            <span class="value">{{ uf() }}</span>
+            <span class="widget-time">31/7, 12:00 a. m.</span>
+          </div>
+        </ion-button>
+        <ion-button (click)="openCurrencyModal('dolar')" fill="clear" class="widget-item data-widget custom-ion-btn" title="Ver historial Dólar">
+          <div class="btn-content">
+            <span class="label">DÓLAR (CLP)</span>
+            <span class="value">{{ dollar() }}</span>
+            <span class="widget-time">31/7, 12:00 a. m.</span>
+          </div>
+        </ion-button>
+        <div class="widget-item weather-widget">
+          <span class="weather-title">CLIMA {{ weather().city }}</span>
+
+          <div class="weather-main">
+            <ion-icon [name]="weather().icon" class="weather-icon" [style.color]="weather().color"></ion-icon>
+            <span class="weather-temp">{{ weather().temp }}</span>
+          </div>
+
+          <span class="weather-desc">{{ weather().description }}</span>
+
+          <span class="weather-time">{{ weather().lastUpdated }}</span>
+        </div>
+      </div>
+    }
+  </ion-toolbar>
+</ion-header>

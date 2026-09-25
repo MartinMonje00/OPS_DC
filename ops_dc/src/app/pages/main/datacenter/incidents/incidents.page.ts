@@ -1,0 +1,108 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular/standalone';
+import { DataService } from 'src/app/services/data';
+import { DatacenterDashboardService } from 'src/app/services/datacenter-dashboard';
+import { UtilsService } from 'src/app/services/utils';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { CreateIncidentComponent } from 'src/app/shared/components/modals/create-incident/create-incident.component';
+
+@Component({
+  selector: 'app-incidents',
+  templateUrl: './incidents.page.html',
+  styleUrls: ['./incidents.page.scss'],
+  standalone: true,
+  imports: [
+    CommonModule, FooterComponent
+  ]
+})
+export class IncidentsPage implements OnInit, ViewWillEnter {
+  private dataSvc = inject(DataService);
+  private utilsSvc = inject(UtilsService);
+  private dashboardSvc = inject(DatacenterDashboardService);
+
+  incidents = signal<any[]>([]);
+  isLoading = signal<boolean>(false);
+
+  ngOnInit() {
+    this.getIncidents();
+  }
+
+  ionViewWillEnter() {
+    this.getIncidents();
+  }
+
+  getIncidents() {
+    this.isLoading.set(true);
+    this.dataSvc.getIncidents().subscribe({
+      next: (res: any) => {
+        const list = Array.isArray(res?.data) ? res.data : [];
+        this.incidents.set(list);
+        this.isLoading.set(false);
+      },
+      error: (err: any) => {
+        console.error('Error al obtener incidentes:', err);
+        this.isLoading.set(false);
+        this.utilsSvc.presentToast({
+          message: 'Error al obtener el historial de incidentes',
+          duration: 2500,
+          color: 'danger',
+          position: 'middle'
+        });
+      }
+    });
+  }
+
+  async openIncidentModal() {
+    const resData = await this.utilsSvc.presentModal({
+      component: CreateIncidentComponent,
+      cssClass: 'custom-incident-modal'
+    });
+
+    if (resData?.success || resData?.code === 'ROW_INSERT_OK' || resData?.data) {
+      this.getIncidents();
+      this.dashboardSvc.refreshMetrics();
+    }
+  }
+
+  async confirmCloseIncident(item: any) {
+    const id = item.incident_id || item.id;
+    if (!id) return;
+
+    const confirmed = await this.utilsSvc.presentAlert({
+      header: 'Cerrar incidente',
+      message: '¿Desea dar por resuelto y cerrar el incidente?',
+      confirmText: 'Si,cerrar',
+      cancelText: 'Cancelar'
+    });
+
+    if (confirmed) {
+      this.executeCloseIncident(id);
+    }
+  }
+
+  private executeCloseIncident(id: string) {
+    this.dataSvc.updateIncident(id, {}).subscribe({
+      next: (res: any) => {
+        this.utilsSvc.presentToast({
+          message: res?.message || 'Incidente cerrado correctamente',
+          duration: 2000,
+          color: 'success',
+          position: 'middle'
+        });
+        this.getIncidents();
+        this.dashboardSvc.refreshMetrics();
+      },
+      error: (err: any) => {
+        console.error('error al cerrar el incidente:', err);
+        const errorMsg = err?.error?.error || 'No se pudo cerrar el incidente';
+        this.utilsSvc.presentToast({
+          message: errorMsg,
+          duration: 2500,
+          color: 'danger',
+          position: 'middle'
+        });
+      }
+    });
+  }
+}

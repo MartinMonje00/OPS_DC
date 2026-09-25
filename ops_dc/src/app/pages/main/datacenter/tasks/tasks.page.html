@@ -1,0 +1,64 @@
+<div class="dc-card grid-area-1">
+    <div class="dc-card-header">
+        <div class="dc-header-title">
+            <span class="dc-card-subtitle">OPERACION DIARIA</span>
+            <h2 class="dc-card-title">Tareas del dia</h2>
+        </div>
+
+        <div class="header-actions">
+            <button type="button" class="btn-primary" (click)="openTaskModal()">
+                + Nueva tarea
+            </button>
+        </div>
+    </div>
+
+    <div class="dc-card-body">
+        <div class="task-list">
+            @if (isLoading()) {
+                <div class="state-message">Cargando tareas desde el servidor...</div>
+            } @else if (tasks().length === 0) {
+                <div class="state-message">No hay tareas pendientes asignadas</div>
+            } @else {
+                @for (item of tasks(); track item.task_id || $index) {
+                    <div class="task-row" [class.is-open]="item.status !== 0">
+                        <div class="task-info">
+                            <h3 class="task-name">{{ item.name }}</h3>
+
+                            @if (item.description) {
+                                <p class="task-description">
+                                    {{ item.description }}
+                                </p>
+                            }
+
+                            <p class="task-sub">
+                                Vence: {{ (item.date | date:'dd-MM-yyyy') || 'Sin fecha' }}
+                            </p>
+                        </div>
+
+                        <div class="task-actions">
+                            <div class="card-badges">
+                                <span class="badge status" [ngClass]="item.status === 1 ? 'en-progreso' : 'pendiente'">
+                                    {{ item.status === 1 ? 'En progreso' : 'Pendiente' }}
+                                </span>
+                            </div>
+
+                            <div class="button-group">
+                                <button type="button" class="btn-action btn-toggle" (click)="toggleTaskStatus(item)">
+                                    <ion-icon name="refresh-outline"></ion-icon>
+                                </button>
+
+                                <button type="button" class="btn-action btn-success" (click)="confirmCompleteTask(item)">
+                                    <ion-icon name="checkmark-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="page-footer-wrapper">
+    <app-footer></app-footer>
+</div>
