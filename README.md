@@ -5,66 +5,39 @@ Sitio WEB para el manejo de DataCenters principalmente creado por Roberto Carmon
 
 ## Requisitos previos
 Para requisitos previos, se necesita estas instalaciones al probar en estado de Desarrollo
- - Xampp con Apache y MySQL.
- - Node.js version 24.14.0.
- - Angular CLI version 21.2.14.
- - Ionic CLI version 7.2.1.
- - MariaDB.
+ - Node.js versión 26.4.0.
+ - Angular CLI versión 22.0.5.
+ - Ionic CLI versión 7.2.1.
+ - chart.js version 4.5.1.
+ - jwt-decode version 4.0.0.
  - API personalizada para el proyecto.
  - Navegador local.
 
 ## Instalación
-Para la instalacion del proyecto de manera local, se requiere que se instalen las dependencias escritas en Requisitos previos
-
----
-1. este es un test
+ La manera de instalar el proyecto para su uso en la maquina local depende de si la instalacion es de forma local o por medio de docker
+ - Local:
+ - Docker:
 
 ## Modulos
-pendiente, sugeto a cambios...
-
-# RoadMap del proyecto
-Sugeto a cambios...
+ -
 
 ## Front-End
- - CRUD del usuario (Inicio de sesion, recuperacion de contraseña, Cierre de sesion)
- - Pagina de inicio
- - SideBar-Menu
- - CRM Modificado
+ - 
 
 ## Back-End
- - Creacion de API para conectar a base de datos
- - Creacion de funciones para enmascarar datos sensibles
- - Recuperacion de datos
- - Implementacion de CORS (Cross-Origin Resource Sharing)
+ - El back-end esta en el [repositorio de la API](https://github.com/MartinMonje00/API-ops_dc)
 
-## Base de Datos
- - Desarrollo de arquitectura de base de datos
- - Creacion de tablas
- - Poblacion de datos (Puede ser manual, no del todo recomendable)
- - Conexion con API
-
-## Pruebas Pre-Despliegue
- - Desarrollo de plan de pruebas
- - Desarrollo plan de ejecucion de pruebas
- - Desarrollo plan de pruebas de seguridad
- - Ejecucion de pruebas
- - Informe de resultados
+## Pruebas del software
+ - 
 
 ## Despliegue
- - Implementacion de Pipeline CI/CD en el repositorio del proyecto
- - Creacion de VM (Virtual Machine) para la ejecucion de la aplicacion (100% WEB)
- - Adicion de Xampp para correcto funcionamiento de MySQL dentro de la aplicacion
- - Creacion de pruebas automatizadas para futuras actualizaciones de la aplicacion
- - (Idea de concepto) Implementar Docker a la automatizacion de pruebas de la aplicacion
- - Implementar funciones complementarias en el Pipeline de CI/CD para despliegue automatico
+ - Primer despliegue manual
 
 ### Requerimientos previos
- - FileZilla (Para poder mover archivos de la aplicacion WEB a la maquina virtual)
- - PuTTY (Establecer conexion SSH con la maquina virtual (Solo necesario en el caso de Windows))
- - Conocimientos de basicos a intermedios del uso de Linux (o GNU/Linux si se usa con interfaz grafica)
+ - 
 
 #### Version del proyecto
-v0.3.12.6
+v2.0.1 version no oficial - v1.0.0 version oficial
 
 #### Version del README.md
-v1.4.15
+v2.3.9

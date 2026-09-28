@@ -1,0 +1,9 @@
+node_modules
+.angular
+www
+dist
+.git
+.gitignore
+.github
+README.md
+Dockerfile

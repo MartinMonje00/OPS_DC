@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ionic-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ops_frontend_local
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - dc_network
+
+networks:
+  dc_network:
+    external: true

@@ -2,3 +2,5 @@
 ops_dc/node_modules/
 ops_dc/.angular/
 ops_dc/src/environments/environment.ts
+ops_dc/src/environments/environment.prod.ts
+ops_dc/www/
